@@ -7,11 +7,31 @@ interface Props {
 	title: string;
 	description: string;
 	image?: string;
+	type?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const { title, description, image = '/blog-placeholder-1.jpg', type = 'website' } = Astro.props;
 
-const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
+const structuredData = {
+	"@context": "https://schema.org",
+	"@type": "Person",
+	"name": "Lorenzo Donzelli Diaz",
+	"jobTitle": ["Software Developer", "Music Producer"],
+	"worksFor": {
+		"@type": "Organization",
+		"name": "ArcaFondi"
+	},
+	"url": Astro.site,
+	"sameAs": [
+		"https://www.linkedin.com/in/lorenzo-donzelli-diaz-71796b94/",
+		"https://github.com/acjnn",
+		"https://open.spotify.com/intl-it/artist/1tzPTUM1XKUck2s6TUh2o1",
+		"https://www.instagram.com/loredonzdiaz/"
+	],
+	"knowsAbout": ["Backend Development", "Database Architecture", "Music Production", "Java", "JavaScript", "PostgreSQL", "MongoDB", "Neo4j"],
+	"alumniOf": "Scuola Europa Milano"
+};
 ---
 
 <!-- Global Metadata -->
@@ -19,6 +39,8 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="generator" content={Astro.generator} />
+<meta name="author" content="Lorenzo Donzelli Diaz" />
+<meta name="robots" content="index, follow" />
 
 <!-- Font preloads -->
 <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin />
@@ -32,16 +54,9 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<!-- Professional/Music Meta Tags -->
+<meta name="keywords" content="backend developer, software engineer, music producer, AcjnN, database architecture, PostgreSQL, MongoDB, Neo4j, Milano, finance technology" />
+<meta name="theme-color" content="#1a1a1a" />
 
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+<!-- Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
