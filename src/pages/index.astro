@@ -1,50 +1,434 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import '../styles/site.css';
+
+const headlineDelay = (index: number) => `animation-delay: ${0.08 * index + 0.1}s`;
+
+const STACK = [
+	{
+		n: 'i',
+		name: 'Backend',
+		role: 'the bones',
+		items: ['Java / Spring', 'Python', 'Django', 'FastAPI', 'Celery', 'PostgreSQL', 'Redis'],
+		note: 'where the real arguments happen.',
+	},
+	{
+		n: 'ii',
+		name: 'Frontend',
+		role: 'the surface',
+		items: ['React', 'Next.js', 'TypeScript', 'Tailwind', 'HTMX (occasionally)'],
+		note: 'kept honest by designers and users.',
+	},
+	{
+		n: 'iii',
+		name: 'Infrastructure',
+		role: 'the room it lives in',
+		items: ['Docker', 'Terraform', 'DigitalOcean', 'GitHub Actions', 'Nginx'],
+		note: 'boring on purpose.',
+	},
+	{
+		n: 'iv',
+		name: 'AI · LLM',
+		role: 'the new instrument',
+		items: ['OpenAI', 'Mistral', 'LangChain', 'SQL-first AI workflows', 'evals'],
+		note: 'product-grade, in production.',
+	},
+];
+
+const ROLES = [
+	{
+		yr: '2024 -',
+		place: 'Epiphany',
+		where: 'Remote, Copenhagen HQ',
+		role: 'Fullstack &amp; AI Engineer',
+		impact:
+			'Shipping Django + Next.js apps, SQL-backed AI workflows and Celery-based async pipelines on DigitalOcean, turning Epiphany&rsquo;s product work into reliable production systems.',
+		tags: ['Django', 'Next.js', 'SQL', 'Celery', 'DigitalOcean'],
+	},
+	{
+		yr: '2022 - 2024',
+		place: 'ArcaFondi',
+		where: 'Milano, IT',
+		role: 'Backend &amp; R&amp;D Engineer',
+		impact:
+			'Worked across backend and R&amp;D at ArcaFondi, an Italian SGR, building Java services for portfolio, market-data, and internal research workflows with Bloomberg and Morgan Stanley integrations.',
+		tags: ['Java', 'Bloomberg API', 'Morgan Stanley', 'R&D'],
+	},
+	{
+		yr: '2020 - 2022',
+		place: 'Intesa Sanpaolo',
+		where: 'Italy',
+		role: 'Software Engineer',
+		impact:
+			'Built and maintained backend services for banking workflows, focusing on reliability, integrations, and day-to-day production support.',
+		tags: ['Java', 'Spring', 'Oracle', 'high-availability'],
+	},
+];
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Donzelli Diaz - AI Engineer · Backend</title>
+		<meta
+			name="description"
+			content="Lorenzo Donzelli - fullstack & AI engineer. Six years between Italian fintech and a Copenhagen-based AI company."
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Caveat:wght@400;600&family=JetBrains+Mono:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
 	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
+		<div class="page">
+			<div class="grain" aria-hidden="true"></div>
+
+			<section class="hero" data-screen-label="01 Hero">
+				<div class="masthead">
+					<span class="mast-l">Donzelli&nbsp;Diaz&nbsp;·&nbsp;Vol.&nbsp;VI&nbsp;·&nbsp;No.&nbsp;01</span>
+					<span class="mast-c">- A FIELD GUIDE / PORTFOLIO -</span>
+					<span class="mast-r">MMXXVI · MILANO / BANGKOK</span>
+				</div>
+				<svg class="rule rule--mast" viewBox="0 0 1000 8" preserveAspectRatio="none" aria-hidden="true">
+					<path d="M 2 4 Q 80 1, 160 5 T 320 3 Q 420 7, 520 4 T 720 5 Q 820 2, 920 5 T 998 4" fill="none" stroke="#0e0c0a" stroke-width="1.2" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+				</svg>
+
+				<div class="hero-grid" style="transform: translateY(0px)">
+					<div class="hero-left">
+						<div class="kicker">
+							<span style="position: relative; display: inline-block; padding: 0.15em 0.45em">
+								<svg style="position: absolute; inset: 0; width: 100%; height: 100%" viewBox="0 0 60 40" preserveAspectRatio="none" aria-hidden="true">
+									<path d="M 8 6 Q 30 2, 52 8 Q 56 20, 52 34 Q 30 38, 8 34 Q 4 20, 8 6 Z" fill="none" stroke="#b84a1f" stroke-width="1.5" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path>
+								</svg>
+								<span style="position: relative"><span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em">№ 01</span></span>
+							</span>
+							<span class="kicker-text">FULLSTACK&nbsp;/&nbsp;AI&nbsp;ENGINEER&nbsp;-&nbsp;ITALY&nbsp;·&nbsp;CUBA&nbsp;·&nbsp;TH</span>
+						</div>
+
+						<div class="display-wrap">
+							<h1 class="display display--main" aria-label="DONZELLI" style="margin: 0">
+								{'DONZELLI'.split('').map((ch, i) => (
+									<span class="ink-letter" style={headlineDelay(i)}>{ch}</span>
+								))}
+							</h1>
+							<div class="display-row">
+								<span class="amp">&amp;</span>
+								<h1 class="display display--alt" aria-label="DIAZ" style="margin: 0">
+									{'DIAZ'.split('').map((ch, i) => (
+										<span class="ink-letter" style={headlineDelay(i)}>{ch}</span>
+									))}
+								</h1>
+							</div>
+						</div>
+
+						<div class="subline">
+							<span class="subline-l">AI Engineer</span>
+							<span class="dot">·</span>
+							<span>Backend</span>
+							<span class="dot">·</span>
+							<span>Six Years in Fintech &amp; GenAI</span>
+						</div>
+
+						<div class="hero-meta">
+							<span class="marginalia" style="transform: rotate(-3deg); color: #b84a1f">
+								↳ available for senior IC roles &amp; staff-level engagements
+							</span>
+						</div>
+					</div>
+
+					<aside class="hero-right">
+						<div class="vert-label">EST.&nbsp;2019&nbsp;-&nbsp;CURRENTLY&nbsp;AT&nbsp;EPIPHANY&nbsp;(REMOTE)</div>
+						<div class="hero-card">
+							<svg class="hero-card__border" viewBox="0 0 400 200" preserveAspectRatio="none" aria-hidden="true">
+								<path d="M 6 8 Q 100 4, 200 7 T 396 9 Q 397 60, 395 110 T 394 192 Q 280 196, 180 193 T 5 191 Q 7 130, 6 80 T 6 8 Z" fill="none" stroke="#0e0c0a" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+								<path d="M 9 11 Q 110 7, 210 10 T 392 13 Q 391 70, 393 120 T 390 188 Q 270 192, 170 189 T 9 187 Q 11 120, 9 70 T 9 11 Z" fill="none" stroke="#0e0c0a" stroke-width="0.9799999999999999" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" opacity="0.55"></path>
+							</svg>
+							<div class="hero-card__inner">
+								<div class="cap">FROM&nbsp;THE&nbsp;EDITOR</div>
+								<p class="lede">
+									A working dossier of <em>Lorenzo Donzelli</em>, six years between
+									Italian banking floors and a Copenhagen-based AI company. Compiled here:
+									the stack, the ledger, the people he&rsquo;s built with.
+								</p>
+								<div class="folio">
+									<span>Folio</span>
+									<span class="folio-num">001</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="hero-stamp">
+							<svg viewBox="0 0 120 120" aria-hidden="true" style="width: 100%; height: 100%">
+								<defs>
+									<path id="stamp-circ" d="M 60 60 m -42 0 a 42 42 0 1 1 84 0 a 42 42 0 1 1 -84 0"></path>
+								</defs>
+								<circle cx="60" cy="60" r="50" fill="none" stroke="#b84a1f" stroke-width="1.2"></circle>
+								<circle cx="60" cy="60" r="44" fill="none" stroke="#b84a1f" stroke-width="0.8" stroke-dasharray="2 3"></circle>
+								<text font-family="'JetBrains Mono', monospace" font-size="8" fill="#b84a1f" letter-spacing="2">
+									<textPath href="#stamp-circ" startOffset="0">SHIPPED · DEBUGGED · SHIPPED AGAIN · </textPath>
+								</text>
+								<text x="60" y="58" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-weight="700" font-style="italic" font-size="20" fill="#b84a1f">L.D.</text>
+								<text x="60" y="74" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#b84a1f" letter-spacing="2">2019-2026</text>
+							</svg>
+						</div>
+					</aside>
+				</div>
+
+				<div class="hero-foot">
+					<svg class="rule" viewBox="0 0 1000 8" preserveAspectRatio="none" aria-hidden="true">
+						<path d="M 2 4 Q 80 1, 160 5 T 320 3 Q 420 7, 520 4 T 720 5 Q 820 2, 920 5 T 998 4" fill="none" stroke="#0e0c0a" stroke-width="1.2" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+					</svg>
+					<div class="hero-foot-row">
+						<span class="cap">Continue&nbsp;reading&nbsp;↓</span>
+						<span class="cap" style="margin-left: auto">I.&nbsp;Identity&nbsp;&nbsp;·&nbsp;&nbsp;II.&nbsp;Stack&nbsp;&nbsp;·&nbsp;&nbsp;III.&nbsp;Ledger&nbsp;&nbsp;·&nbsp;&nbsp;IV.&nbsp;Contact</span>
+					</div>
+				</div>
+			</section>
+
+			<section class="section about" data-screen-label="02 About">
+				<div class="section-head">
+					<span class="sec-num">I.</span>
+					<span class="sec-title">Identity</span>
+					<span class="sec-sub">- a short note from the author</span>
+				</div>
+				<svg class="rule" viewBox="0 0 1000 8" preserveAspectRatio="none" aria-hidden="true">
+					<path d="M 2 4 Q 80 1, 160 5 T 320 3 Q 420 7, 520 4 T 720 5 Q 820 2, 920 5 T 998 4" fill="none" stroke="#0e0c0a" stroke-width="1.2" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+				</svg>
+
+				<div class="about-grid">
+					<div class="about-col about-col--prose">
+						<p class="dropcap">
+							<span class="cap-letter">B</span>egan in the back-office of Italian
+							finance, Intesa Sanpaolo, then ArcaFondi, wiring Bloomberg and
+							Morgan Stanley feeds into Java services that had to be right by 09:00,
+							every morning, without exception. The discipline stuck. The taste for
+							systems that fail loudly stuck. Now the surface area is wider:
+							Django, Next.js, Celery queues humming on DigitalOcean, and SQL-backed
+							AI workflows stitched out of OpenAI, Mistral, and a great deal of patience.
+						</p>
+						<p class="prose">
+							Italian, with Cuban roots, currently building fully remote at <em>Epiphany</em>,
+							a Copenhagen-based AI company. Off the clock there is a record label, a small one, run
+							out of stubbornness more than business sense. It teaches you the same
+							lesson a production incident teaches you: the work is the work, and
+							nobody is coming to do it for you.
+						</p>
+					</div>
+
+					<aside class="about-col about-col--meta">
+						<span class="marginalia" style="transform: rotate(-2deg); position: absolute; top: -1.5rem; left: 0; color: #b84a1f">
+							↳ &ldquo;fintech-grain, AI-shape&rdquo;
+						</span>
+
+						<div class="pull">
+							<span class="quote-mark">&ldquo;</span>
+							<p>
+								The discipline of a 09:00 trading floor; the appetite of a research lab.
+							</p>
+							<span class="quote-attr">- ed. note</span>
+						</div>
+
+						<div class="facts">
+							<div class="fact">
+								<span class="fact-k">Based</span>
+								<span class="fact-v">Milano&nbsp;⇄&nbsp;Bangkok</span>
+							</div>
+							<div class="fact">
+								<span class="fact-k">Years</span>
+								<span class="fact-v">VI</span>
+							</div>
+							<div class="fact">
+								<span class="fact-k">Languages</span>
+								<span class="fact-v">IT · ES · EN</span>
+							</div>
+							<div class="fact">
+								<span class="fact-k">Off-hours</span>
+								<span class="fact-v">a record label, of all things</span>
+							</div>
+						</div>
+					</aside>
+				</div>
+			</section>
+
+			<section class="section stack" data-screen-label="03 Stack">
+				<div class="section-head">
+					<span class="sec-num">II.</span>
+					<span class="sec-title">Stack</span>
+					<span class="sec-sub">- what is on the workbench</span>
+				</div>
+				<svg class="rule" viewBox="0 0 1000 8" preserveAspectRatio="none" aria-hidden="true">
+					<path d="M 2 4 Q 80 1, 160 5 T 320 3 Q 420 7, 520 4 T 720 5 Q 820 2, 920 5 T 998 4" fill="none" stroke="#0e0c0a" stroke-width="1.2" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+				</svg>
+
+				<div class="stack-list">
+					{STACK.map((g) => (
+						<article class="stack-row">
+							<div class="stack-roman">{g.n}.</div>
+							<div class="stack-name">
+								<h3>{g.name}</h3>
+								<span class="stack-role">{g.role}</span>
+							</div>
+							<ul class="stack-items">
+								{g.items.map((it) => <li>{it}</li>)}
+							</ul>
+							<div class="stack-note">
+								<em>{g.note}</em>
+							</div>
+						</article>
+					))}
+				</div>
+			</section>
+
+			<section class="section exp" data-screen-label="04 Experience">
+				<div class="section-head">
+					<span class="sec-num">III.</span>
+					<span class="sec-title">The Ledger</span>
+					<span class="sec-sub">- roles, in reverse chronological order</span>
+				</div>
+				<svg class="rule" viewBox="0 0 1000 8" preserveAspectRatio="none" aria-hidden="true">
+					<path d="M 2 4 Q 80 1, 160 5 T 320 3 Q 420 7, 520 4 T 720 5 Q 820 2, 920 5 T 998 4" fill="none" stroke="#0e0c0a" stroke-width="1.2" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+				</svg>
+
+				<ol class="exp-list">
+					{ROLES.map((r, i) => (
+						<li class="exp-row">
+							<div class="exp-yr">{r.yr}</div>
+							<div class="exp-spine">
+								<span class="exp-dot"></span>
+							</div>
+							<div class="exp-body">
+								<div class="exp-head">
+									<h3 class="exp-place" set:html={r.place} />
+									<span class="exp-where" set:html={r.where} />
+								</div>
+								<div class="exp-role" set:html={r.role} />
+								<p class="exp-impact" set:html={r.impact} />
+								<ul class="exp-tags">
+									{r.tags.map((t) => <li>{t}</li>)}
+								</ul>
+							</div>
+							{i === 0 && (
+								<span class="marginalia" style="transform: rotate(6deg); position: absolute; right: -0.5rem; top: 0.5rem; color: #b84a1f">
+									← present day
+								</span>
+							)}
+						</li>
+					))}
+				</ol>
+			</section>
+
+			<section class="section contact" data-screen-label="05 Contact">
+				<div class="section-head">
+					<span class="sec-num">IV.</span>
+					<span class="sec-title">Correspondence</span>
+					<span class="sec-sub">- the door is open</span>
+				</div>
+				<svg class="rule" viewBox="0 0 1000 8" preserveAspectRatio="none" aria-hidden="true">
+					<path d="M 2 4 Q 80 1, 160 5 T 320 3 Q 420 7, 520 4 T 720 5 Q 820 2, 920 5 T 998 4" fill="none" stroke="#0e0c0a" stroke-width="1.2" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+				</svg>
+
+				<div class="contact-grid">
+					<div class="contact-pitch">
+						<p class="contact-line">
+							If you are building something that needs a backend that won&rsquo;t
+							quietly fall over, or an LLM pipeline that won&rsquo;t hallucinate
+							your business away,
+						</p>
+						<p class="contact-line contact-line--big">
+							<em>write.</em>
+						</p>
+					</div>
+
+					<div class="contact-card">
+						<svg class="contact-card__border" viewBox="0 0 400 200" preserveAspectRatio="none" aria-hidden="true">
+							<path d="M 6 8 Q 100 4, 200 7 T 396 9 Q 397 60, 395 110 T 394 192 Q 280 196, 180 193 T 5 191 Q 7 130, 6 80 T 6 8 Z" fill="none" stroke="#0e0c0a" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+							<path d="M 9 11 Q 110 7, 210 10 T 392 13 Q 391 70, 393 120 T 390 188 Q 270 192, 170 189 T 9 187 Q 11 120, 9 70 T 9 11 Z" fill="none" stroke="#0e0c0a" stroke-width="1.1199999999999999" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" opacity="0.55"></path>
+						</svg>
+						<div class="contact-card__inner">
+							<div class="contact-row">
+								<span class="cap">e-mail</span>
+								<a class="ink-link" href="mailto:lorenzodonzelli93@gmail.com" style="--ink: #b84a1f">
+									<span>lorenzodonzelli93@gmail.com</span>
+									<svg class="ink-link__rule" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true">
+										<path d="M 2 6 Q 25 2, 50 7 T 100 5 Q 130 9, 160 4 T 198 7" fill="none" stroke="#b84a1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
+									</svg>
+								</a>
+							</div>
+							<div class="contact-row">
+								<span class="cap">linkedin</span>
+								<a class="ink-link" href="https://www.linkedin.com/in/lorenzo-donzelli-diaz-71796b94/" target="_blank" rel="noopener noreferrer" style="--ink: #b84a1f">
+									<span>/in/lorenzo-donzelli-diaz-71796b94</span>
+									<svg class="ink-link__rule" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true">
+										<path d="M 2 6 Q 25 2, 50 7 T 100 5 Q 130 9, 160 4 T 198 7" fill="none" stroke="#b84a1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
+									</svg>
+								</a>
+							</div>
+							<div class="contact-row">
+								<span class="cap">github</span>
+								<a class="ink-link" href="https://github.com/acjn" target="_blank" rel="noopener noreferrer" style="--ink: #b84a1f">
+									<span>github.com/acjn</span>
+									<svg class="ink-link__rule" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true">
+										<path d="M 2 6 Q 25 2, 50 7 T 100 5 Q 130 9, 160 4 T 198 7" fill="none" stroke="#b84a1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
+									</svg>
+								</a>
+							</div>
+							<div class="contact-row">
+								<span class="cap">domain</span>
+								<span class="contact-plain">donzellidiaz.com</span>
+							</div>
+
+							<a href="#" class="cv-btn">
+								<svg class="cv-btn__border" viewBox="0 0 400 200" preserveAspectRatio="none" aria-hidden="true">
+									<path d="M 6 8 Q 100 4, 200 7 T 396 9 Q 397 60, 395 110 T 394 192 Q 280 196, 180 193 T 5 191 Q 7 130, 6 80 T 6 8 Z" fill="none" stroke="#f0ead6" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+									<path d="M 9 11 Q 110 7, 210 10 T 392 13 Q 391 70, 393 120 T 390 188 Q 270 192, 170 189 T 9 187 Q 11 120, 9 70 T 9 11 Z" fill="none" stroke="#f0ead6" stroke-width="1.1199999999999999" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" opacity="0.55"></path>
+								</svg>
+								<span class="cv-btn__label">↓ &nbsp;Download&nbsp;CV&nbsp;(pdf)</span>
+								<span class="cv-btn__sub">Lorenzo&nbsp;Donzelli&nbsp;-&nbsp;2026</span>
+							</a>
+						</div>
+					</div>
+
+					<div class="contact-aside">
+						<svg style="width: 110px; height: 70px; transform: translateY(-1rem)" viewBox="0 0 140 90" aria-hidden="true">
+							<g transform="scale(-1,1) translate(-140,0)">
+								<path d="M 10 10 Q 40 30, 60 50 T 110 78" fill="none" stroke="#0e0c0a" stroke-width="1.3" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+								<path d="M 100 70 Q 108 76, 112 80 Q 106 78, 98 82" fill="none" stroke="#0e0c0a" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
+							</g>
+						</svg>
+						<span class="marginalia" style="transform: rotate(-5deg); color: #b84a1f; display: block; margin-top: 0.4rem">
+							replies, usually within a day
+						</span>
+					</div>
+				</div>
+
+				<footer class="colophon">
+					<svg class="rule" viewBox="0 0 1000 8" preserveAspectRatio="none" aria-hidden="true">
+						<path d="M 2 4 Q 80 1, 160 5 T 320 3 Q 420 7, 520 4 T 720 5 Q 820 2, 920 5 T 998 4" fill="none" stroke="#0e0c0a" stroke-width="1.2" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+					</svg>
+					<div class="colophon-row">
+						<span>© MMXXVI &nbsp;Lorenzo&nbsp;Donzelli&nbsp;Diaz</span>
+						<span class="colophon-c">Set&nbsp;in&nbsp;Cormorant&nbsp;&amp;&nbsp;EB&nbsp;Garamond. Hand-inked&nbsp;in&nbsp;the&nbsp;browser.</span>
+						<span>donzellidiaz.com</span>
+					</div>
+				</footer>
+			</section>
+		</div>
+
+		<script is:inline>
+			const heroGrid = document.querySelector('.hero-grid');
+			const cvButton = document.querySelector('.cv-btn');
+
+			const updateHeroOffset = () => {
+				if (heroGrid) {
+					heroGrid.style.transform = `translateY(${window.scrollY * -0.08}px)`;
+				}
+			};
+
+			window.addEventListener('scroll', updateHeroOffset, { passive: true });
+			cvButton?.addEventListener('click', (event) => event.preventDefault());
+		</script>
 	</body>
 </html>
