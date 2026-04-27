@@ -118,6 +118,8 @@ body {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--ink-soft);
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .display-wrap { position: relative; }
@@ -175,7 +177,9 @@ body {
   letter-spacing: 0.02em;
   font-style: italic;
   color: var(--ink);
+  max-width: 100%;
 }
+.subline > span { min-width: 0; }
 .subline-l {
   font-style: normal;
   font-weight: 600;
@@ -781,14 +785,66 @@ body {
 
 /* ============ RESPONSIVE ============ */
 @media (max-width: 880px) {
-  .masthead { grid-template-columns: 1fr; text-align: left; }
+  .hero {
+    padding-top: 2.35rem;
+  }
+  .masthead {
+    grid-template-columns: 1fr;
+    text-align: left;
+    row-gap: 0.35rem;
+    margin-bottom: 1.1rem;
+  }
   .masthead .mast-c, .masthead .mast-r { text-align: left; }
   .hero-grid { grid-template-columns: 1fr; }
-  .hero-right { padding-top: 1.5rem; }
+  .kicker { align-items: flex-start; }
+  .kicker-text {
+    flex: 1 1 0;
+    line-height: 1.45;
+  }
+  .subline {
+    display: flex;
+    row-gap: 0.12rem;
+    column-gap: 0.45rem;
+    line-height: 1.18;
+  }
+  .subline > span:last-child {
+    flex-basis: 100%;
+    line-height: 1.18;
+  }
+  .hero-right {
+    padding-top: 1.5rem;
+    width: 100%;
+  }
   .vert-label { position: static; transform: none; margin-bottom: 0.6rem; display: block; }
-  .hero-stamp { right: 0.5rem; top: 0.5rem; width: 80px; height: 80px; }
+  .hero-card {
+    width: min(100%, 22rem);
+    margin: 0 auto;
+  }
+  .hero-stamp { display: none; }
+  .hero-foot-row {
+    justify-content: center;
+    text-align: center;
+  }
+  .hero-foot-row .cap {
+    width: 100%;
+    max-width: 22rem;
+    margin-left: 0;
+    line-height: 1.5;
+    overflow-wrap: normal;
+  }
   .about-grid { grid-template-columns: 1fr; }
   .about-col--meta { border-left: none; border-top: 1px dashed var(--ink-faint); padding-left: 0; padding-top: 1.2rem; }
+  .pull {
+    padding-top: 0;
+  }
+  .pull .quote-mark {
+    font-size: 2.6rem;
+    line-height: 0.55;
+    margin-bottom: -0.05rem;
+  }
+  .pull p {
+    line-height: 1.12;
+  }
   .stack-row { grid-template-columns: 2.4rem 1fr; gap: 0.6rem 1rem; }
   .stack-row .stack-items, .stack-row .stack-note { grid-column: 1 / -1; }
   .stack-row .stack-note { text-align: left; }
@@ -799,3 +855,4 @@ body {
   .colophon-row > :last-child { text-align: left; }
   .colophon-c { text-align: left; }
 }
+
