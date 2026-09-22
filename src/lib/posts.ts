@@ -21,12 +21,21 @@ export function seriesPosts(posts: Post[], seriesId: string): Post[] {
 		.sort((a, b) => (a.data.seriesOrder ?? 0) - (b.data.seriesOrder ?? 0));
 }
 
-/** Reading time injected by remark-reading-time into frontmatter. */
+/** Words in the essay. Footnote definitions at the end are not part of the count. */
+function countWords(body: string): number {
+	const essay = body.replace(/\n\[\^[^\]]+\]:[\s\S]*$/, "");
+	return essay.trim().split(/\s+/).filter(Boolean).length;
+}
+
+/** Reading time from remark-reading-time, or a 200 wpm count of the body. */
 export function readingTime(post: Post): number | undefined {
 	const rt = (post.data as Record<string, unknown>).readingTime as
 		| { minutes?: number }
 		| undefined;
-	return rt?.minutes ? Math.max(1, Math.round(rt.minutes)) : undefined;
+	const minutes =
+		rt?.minutes ??
+		(post.body ? countWords(post.body) / 200 : undefined);
+	return minutes ? Math.max(1, Math.round(minutes)) : undefined;
 }
 
 export { roman } from "./roman";

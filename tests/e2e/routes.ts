@@ -3,6 +3,8 @@ export const ROUTES = [
 	"/",
 	"/about",
 	"/blog",
+	"/blog/seven-guardrails-down/",
+	"/blog/series/signals/",
 	"/blog/_components-gallery/",
 	"/blog/series/field-notes/",
 	"/blog/_adversarial/torture-title/",
