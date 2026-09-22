@@ -1,0 +1,144 @@
+---
+title: "The Components Gallery"
+description: "Every typographic and graphical instrument in the journal's composing room, exercised on one page."
+pubDate: 2026-09-01
+updatedDate: 2026-09-20
+cover: ./cover.png
+coverAlt: "A flat rust-red field, standing in for a real cover image"
+coverCaption: "fig. 0 — the placeholder cover, in house rust"
+series: field-notes
+seriesOrder: 1
+tags: ["meta", "design", "typography"]
+draft: true
+---
+
+import InteractiveChart from '../../../components/charts/InteractiveChart.tsx';
+
+This post exists to prove that every instrument in the composing room works. It is never published; it is built only when `INCLUDE_DRAFTS=1`, and the test suite walks it at several viewport widths looking for anything that overflows, clips, or breaks.
+
+## Headings, rules, and running text
+
+Body text is set in EB Garamond at a comfortable measure. It should wrap cleanly, never overflow, and keep its rag even on narrow screens. Here is a [link to somewhere](/about) rendered in rust with a dotted underline.
+
+### A third-level heading
+
+Lists behave like this:
+
+- Java services that had to be right by 09:00
+- Celery queues humming on DigitalOcean
+- SQL-backed AI workflows, stitched with patience
+
+1. First the ledger
+2. Then the marginalia
+3. Then the colophon
+
+> A blockquote, set large in Cormorant italic, for quoting strangers and past selves.
+
+---
+
+## Code
+
+Inline `const x = 42` sits in the running text. Blocks get the ink treatment:
+
+```python title="pipeline.py"
+def run_pipeline(jobs: list[Job]) -> None:
+    """Process jobs with loud failures."""
+    for job in jobs:
+        try:
+            job.execute()
+        except Exception as exc:
+            notify(job, exc)
+            raise
+```
+
+## Math
+
+Inline math like $e^{i\pi} + 1 = 0$ flows with the text, and display math stands alone:
+
+$$
+\frac{\partial}{\partial t} \Psi = \frac{i\hbar}{2m} \nabla^2 \Psi
+$$
+
+## Tables
+
+| Component   | Font              | Role            |
+| ----------- | ----------------- | --------------- |
+| Display     | Cormorant Garamond | Titles         |
+| Body        | EB Garamond       | Running text    |
+| Captions    | Caveat            | Marginalia      |
+| Labels      | JetBrains Mono    | Kickers, stamps |
+
+## Figures
+
+<Figure src={import('./figure.png')} alt="A flat ochre field, standing in for a real figure" caption="fig. 1 — the placeholder figure, in house ochre" />
+
+## Asides, pull quotes, callouts
+
+<Aside label="ed. note">
+  This whole page is a fixture. If you are reading it in production, something has gone wrong with the draft filter.
+</Aside>
+
+<PullQuote by="the compositor">The work is the work, and nobody is coming to do it for you.</PullQuote>
+
+<Callout kind="note">
+  Notes arrive in a hand-drawn ink frame, like everything else worth framing.
+</Callout>
+
+<Callout kind="warning" label="warning">
+  Warnings use the rust stroke instead of ink.
+</Callout>
+
+## Columns
+
+<Columns>
+  <div>
+    Left column. Useful for parallel definitions, or for setting a claim next to its evidence.
+  </div>
+  <div>
+    Right column. Keeps its own measure and wraps independently.
+  </div>
+</Columns>
+
+## Charts
+
+<LineChart
+  data={[{ t: 'Jan', v: 12 }, { t: 'Feb', v: 19 }, { t: 'Mar', v: 9 }, { t: 'Apr', v: 24 }, { t: 'May', v: 31 }, { t: 'Jun', v: 27 }]}
+  x="t"
+  y="v"
+  title="Deployments per month"
+  caption="fig. 2 — a hand-inked line"
+  annotations={[{ x: 'Apr', label: 'the incident' }]}
+/>
+
+<BarChart
+  data={[{ t: 'Django', v: 8 }, { t: 'Next.js', v: 5 }, { t: 'Celery', v: 6 }, { t: 'Postgres', v: 9 }]}
+  x="t"
+  y="v"
+  title="Hours in the workbench, by tool"
+  caption="fig. 3 — bars, slightly jittered"
+/>
+
+<ScatterChart
+  data={[{ n: 1, v: 2.1 }, { n: 2, v: 3.9 }, { n: 3, v: 3.2 }, { n: 4, v: 5.8 }, { n: 5, v: 5.1 }, { n: 6, v: 7.4 }]}
+  x="n"
+  y="v"
+  title="Latency against batch size"
+  caption="fig. 4 — scatter, with a point annotated"
+  annotations={[{ x: 6, y: 7.4, label: 'outlier, investigated' }]}
+/>
+
+<InteractiveChart
+  client:visible
+  data={[{ t: 'Jan', v: 12 }, { t: 'Feb', v: 19 }, { t: 'Mar', v: 9 }, { t: 'Apr', v: 24 }, { t: 'May', v: 31 }, { t: 'Jun', v: 27 }]}
+  x="t"
+  y="v"
+  kind="line"
+  caption="fig. 5 — the interactive variant, hover it"
+/>
+
+## Footnotes
+
+Footnotes collect at the foot of the page, as they should.[^1] They can be referenced more than once in spirit, though each marker is unique.[^2]
+
+[^1]: The first note, set small beneath a rule.
+[^2]: The second note, with a [link back to the top](#).

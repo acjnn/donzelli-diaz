@@ -1,111 +1,159 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
-import { getCollection } from 'astro:content';
-import FormattedDate from '../../components/FormattedDate.astro';
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import SectionHead from "../../components/SectionHead.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+import { getPosts, readingTime, roman } from "../../lib/posts";
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+const posts = await getPosts();
+const publishedSeriesIds = new Set(
+	posts.map((p) => p.data.series?.id).filter((id): id is string => Boolean(id)),
 );
+const allSeries = (await getCollection("series")).filter((s) => publishedSeriesIds.has(s.id));
+
+const byYear = new Map<number, typeof posts>();
+for (const post of posts) {
+	const year = post.data.pubDate.getFullYear();
+	if (!byYear.has(year)) byYear.set(year, []);
+	byYear.get(year)!.push(post);
+}
+const years = [...byYear.keys()].sort((a, b) => b - a);
+
+let counter = 0;
+const numbers = new Map<string, number>();
+for (const post of posts) {
+	counter += 1;
+	numbers.set(post.id, counter);
+}
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				width: 960px;
-			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
+<Base title="The Journal" description="Long-form dispatches on backend systems, LLM pipelines, and the craft of shipping." section="THE JOURNAL">
+	<section class="section" style="padding-top: 1.5rem">
+		<SectionHead num="§" title="The Journal" sub="dispatches, in reverse chronological order" />
+
+		<div class="toc-grid">
+			<div class="toc-main">
+				{
+					posts.length === 0 && (
+						<p class="toc-empty">
+							<em>The presses are warming up. The first dispatch is being set in type.</em>
+						</p>
+					)
 				}
-				ul li {
-					width: 100%;
-					text-align: center;
+				{
+					years.map((year) => (
+						<div class="toc-year">
+							<h2 class="toc-year__label">{year}</h2>
+							<ol class="dispatch-list">
+								{byYear.get(year)!.map((post) => {
+									const rt = readingTime(post);
+									return (
+										<li class="dispatch">
+											<a href={`/blog/${post.id}/`}>
+												<span class="dispatch__num">{roman(numbers.get(post.id)!)}.</span>
+												<span class="dispatch__date">
+													<FormattedDate date={post.data.pubDate} />
+												</span>
+												<div class="dispatch__body">
+													<h3 class="dispatch__title">{post.data.title}</h3>
+												<p class="dispatch__deck">{post.data.description}</p>
+											</div>
+												{rt && <span class="dispatch__time">{rt} min</span>}
+											</a>
+										</li>
+									);
+								})}
+							</ol>
+						</div>
+					))
 				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
+			</div>
+
+			{
+				allSeries.length > 0 && (
+					<aside class="toc-side">
+						<h2 class="toc-side__head">Series</h2>
+						<ul class="toc-series">
+							{allSeries.map((s) => (
+								<li>
+									<a href={`/blog/series/${s.id}/`}>{s.data.title}</a>
+									<span class="toc-series__desc">{s.data.description}</span>
+								</li>
+							))}
+						</ul>
+					</aside>
+				)
 			}
-		</style>
-	</head>
-	<body>
-		<Header />
-		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									<img width={720} height={360} src={post.data.heroImage} alt="" />
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</main>
-		<Footer />
-	</body>
-</html>
+		</div>
+	</section>
+</Base>
+
+<style>
+	.toc-grid {
+		margin-top: clamp(1.5rem, 3vw, 2.5rem);
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		gap: clamp(1.5rem, 4vw, 3rem);
+		align-items: start;
+	}
+	@media (min-width: 1000px) {
+		.toc-grid {
+			grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr);
+		}
+	}
+	.toc-year__label {
+		font-family: var(--font-display);
+		font-style: italic;
+		font-weight: 500;
+		font-size: clamp(1.6rem, 3vw, 2.2rem);
+		color: var(--ochre);
+		margin: 2rem 0 0.4rem;
+	}
+	.toc-year:first-child .toc-year__label {
+		margin-top: 0;
+	}
+	.toc-empty {
+		font-family: var(--font-body);
+		font-size: 1.2rem;
+		color: var(--ink-soft);
+	}
+	.toc-side {
+		border-left: 1px dashed var(--ink-faint);
+		padding-left: clamp(1rem, 2vw, 1.6rem);
+	}
+	.toc-side__head {
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--ink-soft);
+		margin: 0 0 0.8rem;
+	}
+	.toc-series {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+	.toc-series a {
+		font-family: var(--font-display);
+		font-weight: 700;
+		font-size: 1.3rem;
+		letter-spacing: -0.01em;
+		color: var(--ink);
+		text-decoration: none;
+	}
+	.toc-series a:hover {
+		color: var(--rust);
+	}
+	.toc-series__desc {
+		display: block;
+		font-family: var(--font-body);
+		font-style: italic;
+		font-size: 0.95rem;
+		color: var(--ink-soft);
+		margin-top: 0.15rem;
+	}
+</style>

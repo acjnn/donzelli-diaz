@@ -1,0 +1,17 @@
+---
+interface Props {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<svg class:list={["rule", className]} viewBox="0 0 1000 8" preserveAspectRatio="none" aria-hidden="true">
+	<path
+		d="M 2 4 Q 80 1, 160 5 T 320 3 Q 420 7, 520 4 T 720 5 Q 820 2, 920 5 T 998 4"
+		fill="none"
+		stroke="#0e0c0a"
+		stroke-width="1.2"
+		stroke-linecap="round"
+		vector-effect="non-scaling-stroke"></path>
+</svg>

@@ -1,0 +1,30 @@
+/* ============ DONZELLI DIAZ - print (CV) ============ */
+
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 11pt;
+  }
+  .grain,
+  .hero-stamp,
+  .mast-nav,
+  .cv-btn,
+  .skip-link {
+    display: none !important;
+  }
+  .page {
+    background: #fff;
+  }
+  .section {
+    padding: 1.2rem 0;
+    break-inside: avoid-page;
+  }
+  .exp-row {
+    break-inside: avoid-page;
+  }
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+}

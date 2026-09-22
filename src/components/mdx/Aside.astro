@@ -1,0 +1,12 @@
+---
+interface Props {
+	label?: string;
+}
+
+const { label = "marginalia" } = Astro.props;
+---
+
+<aside class="aside">
+	<span class="aside-label">{label}</span>
+	<slot />
+</aside>

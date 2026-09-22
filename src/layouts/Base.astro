@@ -1,0 +1,43 @@
+---
+import "../styles/tokens.css";
+import "../styles/base.css";
+import "../styles/editorial.css";
+import "../styles/prose.css";
+import "../styles/print.css";
+import "../styles/katex.css";
+import "../styles/katex-body.css";
+
+import BaseHead from "../components/BaseHead.astro";
+import Masthead from "../components/Masthead.astro";
+import Colophon from "../components/Colophon.astro";
+
+interface Props {
+	title: string;
+	description: string;
+	image?: string;
+	type?: "website" | "article";
+	section?: string;
+}
+
+const { title, description, image, type, section } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} image={image} type={type} />
+	</head>
+	<body>
+		<a class="skip-link" href="#main">Skip to content</a>
+		<div class="page">
+			<div class="grain" aria-hidden="true"></div>
+			<div class="hero" style="padding-bottom: 0">
+				<Masthead section={section} />
+			</div>
+			<main id="main">
+				<slot />
+			</main>
+			<Colophon />
+		</div>
+	</body>
+</html>

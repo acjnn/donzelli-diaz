@@ -1,0 +1,40 @@
+---
+interface Props {
+	class?: string;
+	stroke?: string;
+	inset?: number;
+}
+
+const { class: className, stroke = "#0e0c0a", inset = 0 } = Astro.props;
+---
+
+<div class:list={["ink-frame", className]}>
+	<svg
+		class="ink-frame__border"
+		viewBox="0 0 400 200"
+		preserveAspectRatio="none"
+		aria-hidden="true"
+		style={inset ? `inset: ${inset}px; width: calc(100% - ${inset * -2}px); height: calc(100% - ${inset * -2}px);` : undefined}
+	>
+		<path
+			d="M 6 8 Q 100 4, 200 7 T 396 9 Q 397 60, 395 110 T 394 192 Q 280 196, 180 193 T 5 191 Q 7 130, 6 80 T 6 8 Z"
+			fill="none"
+			stroke={stroke}
+			stroke-width="1.4"
+			stroke-linejoin="round"
+			stroke-linecap="round"
+			vector-effect="non-scaling-stroke"></path>
+		<path
+			d="M 9 11 Q 110 7, 210 10 T 392 13 Q 391 70, 393 120 T 390 188 Q 270 192, 170 189 T 9 187 Q 11 120, 9 70 T 9 11 Z"
+			fill="none"
+			stroke={stroke}
+			stroke-width="1"
+			stroke-linejoin="round"
+			stroke-linecap="round"
+			vector-effect="non-scaling-stroke"
+			opacity="0.55"></path>
+	</svg>
+	<div class="ink-frame__inner">
+		<slot />
+	</div>
+</div>

@@ -1,0 +1,122 @@
+---
+import { Image } from "astro:assets";
+import { getEntry, type CollectionEntry } from "astro:content";
+import Base from "./Base.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import { readingTime, seriesPosts, type Post } from "../lib/posts";
+
+interface Props {
+	post: Post;
+	allPosts: Post[];
+}
+
+const { post, allPosts } = Astro.props;
+const { title, description, pubDate, updatedDate, cover, coverAlt, coverCaption, tags } = post.data;
+
+const rt = readingTime(post);
+
+let seriesEntry: CollectionEntry<"series"> | undefined;
+let seriesIndex = 0;
+let seriesTotal = 0;
+let prev: Post | undefined;
+let next: Post | undefined;
+
+if (post.data.series) {
+	seriesEntry = await getEntry(post.data.series);
+	if (!seriesEntry) {
+		throw new Error(
+			`Post "${post.id}" references series "${post.data.series.id}", which does not exist in src/content/series/`,
+		);
+	}
+	const parts = seriesPosts(allPosts, post.data.series.id);
+	seriesTotal = parts.length;
+	seriesIndex = parts.findIndex((p) => p.id === post.id);
+	prev = seriesIndex > 0 ? parts[seriesIndex - 1] : undefined;
+	next = seriesIndex >= 0 && seriesIndex < parts.length - 1 ? parts[seriesIndex + 1] : undefined;
+} else {
+	const chronological = [...allPosts].sort(
+		(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
+	);
+	const idx = chronological.findIndex((p) => p.id === post.id);
+	prev = idx > 0 ? chronological[idx - 1] : undefined;
+	next = idx >= 0 && idx < chronological.length - 1 ? chronological[idx + 1] : undefined;
+}
+---
+
+<Base title={title} description={description} type="article" section="THE JOURNAL">
+	<article class="post">
+		<header class="post-head">
+			<div class="post-kicker">
+				<span class="post-no">№</span>
+				<span>
+					<FormattedDate date={pubDate} />
+				</span>
+				{rt && <span>{rt} min read</span>}
+				{
+					seriesEntry && (
+						<span>
+							<a href={`/blog/series/${seriesEntry.id}/`}>{seriesEntry.data.title}</a>
+							{seriesTotal > 0 && ` · part ${seriesIndex + 1} of ${seriesTotal}`}
+						</span>
+					)
+				}
+			</div>
+			<h1 class="post-title">{title}</h1>
+			<p class="post-deck">{description}</p>
+			<div class="post-meta">
+				{
+					updatedDate && (
+						<span>
+							Updated <FormattedDate date={updatedDate} />
+						</span>
+					)
+				}
+				{
+					tags.length > 0 && (
+						<span class="post-tags">
+							{tags.map((t) => (
+								<span>{t}</span>
+							))}
+						</span>
+					)
+				}
+			</div>
+		</header>
+
+		{
+			cover && coverAlt && (
+				<figure class="post-cover">
+					<Image src={cover} alt={coverAlt} widths={[768, 1200, 1600]} sizes="(max-width: 68ch) 100vw, 68ch" />
+					{coverCaption && <figcaption>{coverCaption}</figcaption>}
+				</figure>
+			)
+		}
+
+		<div class="prose">
+			<slot />
+		</div>
+
+		{
+			(prev || next) && (
+				<nav class="post-nav" aria-label="More dispatches">
+					<span>
+						{prev && (
+							<a href={`/blog/${prev.id}/`}>
+								<span class="post-nav__dir">← Previous</span>
+								<span class="post-nav__title">{prev.data.title}</span>
+							</a>
+						)}
+					</span>
+					<span class="post-nav__next">
+						{next && (
+							<a href={`/blog/${next.id}/`}>
+								<span class="post-nav__dir">Next →</span>
+								<span class="post-nav__title">{next.data.title}</span>
+							</a>
+						)}
+					</span>
+				</nav>
+			)
+		}
+	</article>
+</Base>

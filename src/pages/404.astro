@@ -1,0 +1,67 @@
+---
+import Base from "../layouts/Base.astro";
+import InkFrame from "../components/InkFrame.astro";
+---
+
+<Base title="404 — Lost folio" description="This page was never set in type." section="ERRATA">
+	<section class="section" style="padding-top: 2rem">
+		<div class="errata">
+			<span class="errata__code">№ 404</span>
+			<h1 class="errata__title">Lost folio</h1>
+			<p class="errata__deck">
+				<em>This page was never set in type — or the compositor mislaid it.</em>
+			</p>
+			<div class="errata__doors">
+				<a class="door" href="/">
+					<InkFrame>
+						<span class="door__cta">← Back to the front page</span>
+					</InkFrame>
+				</a>
+				<a class="door" href="/blog">
+					<InkFrame>
+						<span class="door__cta">Browse the journal →</span>
+					</InkFrame>
+				</a>
+			</div>
+		</div>
+	</section>
+</Base>
+
+<style>
+	.errata {
+		max-width: 40rem;
+	}
+	.errata__code {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: var(--rust);
+	}
+	.errata__title {
+		font-family: var(--font-display);
+		font-weight: 700;
+		font-size: clamp(3rem, 8vw, 6rem);
+		letter-spacing: -0.02em;
+		line-height: 0.95;
+		text-transform: uppercase;
+		transform: scaleX(0.92);
+		transform-origin: left center;
+		margin: 0.6rem 0 0.8rem;
+	}
+	.errata__deck {
+		font-family: var(--font-body);
+		font-size: 1.2rem;
+		color: var(--ink-soft);
+		margin: 0 0 2rem;
+	}
+	.errata__doors {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+		gap: 1.2rem;
+	}
+	.errata__doors .door {
+		padding: 1.2rem 1.4rem;
+		text-align: center;
+	}
+</style>

@@ -1,0 +1,16 @@
+---
+import InkRule from "./InkRule.astro";
+import { DOMAIN } from "../consts";
+---
+
+<footer class="colophon">
+	<InkRule />
+	<div class="colophon-row">
+		<span>© MMXXVI &nbsp;Lorenzo&nbsp;Donzelli&nbsp;Diaz</span>
+		<span class="colophon-c">
+			Set&nbsp;in&nbsp;Cormorant&nbsp;&amp;&nbsp;EB&nbsp;Garamond. Hand-inked&nbsp;in&nbsp;the&nbsp;browser.
+			&nbsp;·&nbsp; <a href="/rss.xml">RSS</a>
+		</span>
+		<span>{DOMAIN}</span>
+	</div>
+</footer>

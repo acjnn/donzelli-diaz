@@ -1,21 +1,50 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
-import BlogPost from '../../layouts/BlogPost.astro';
-import { render } from 'astro:content';
+import { render } from "astro:content";
+import PostLayout from "../../layouts/Post.astro";
+import { getPosts, type Post } from "../../lib/posts";
+import Aside from "../../components/mdx/Aside.astro";
+import Callout from "../../components/mdx/Callout.astro";
+import Columns from "../../components/mdx/Columns.astro";
+import Figure from "../../components/mdx/Figure.astro";
+import PullQuote from "../../components/mdx/PullQuote.astro";
+import TableWrap from "../../components/mdx/TableWrap.astro";
+import InkRule from "../../components/InkRule.astro";
+import LineChart from "../../components/charts/LineChart.astro";
+import BarChart from "../../components/charts/BarChart.astro";
+import ScatterChart from "../../components/charts/ScatterChart.astro";
+import InteractiveChart from "../../components/charts/InteractiveChart.tsx";
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
+	const posts = await getPosts();
 	return posts.map((post) => ({
 		params: { slug: post.id },
-		props: post,
+		props: { post, allPosts: posts },
 	}));
 }
-type Props = CollectionEntry<'blog'>;
 
-const post = Astro.props;
+interface Props {
+	post: Post;
+	allPosts: Post[];
+}
+
+const { post, allPosts } = Astro.props;
 const { Content } = await render(post);
+
+const components = {
+	Aside,
+	Callout,
+	Columns,
+	Figure,
+	PullQuote,
+	TableWrap,
+	Rule: InkRule,
+	LineChart,
+	BarChart,
+	ScatterChart,
+	InteractiveChart,
+};
 ---
 
-<BlogPost {...post.data}>
-	<Content />
-</BlogPost>
+<PostLayout post={post} allPosts={allPosts}>
+	<Content components={components} />
+</PostLayout>

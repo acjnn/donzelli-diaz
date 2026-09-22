@@ -27,3 +27,8 @@ pnpm-debug.log*
 # wrangler files
 .wrangler
 .dev.vars
+
+# test output
+test-results/
+playwright-report/
+.lighthouseci/

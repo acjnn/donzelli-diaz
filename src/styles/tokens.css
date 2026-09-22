@@ -1,0 +1,20 @@
+/* ============ DONZELLI DIAZ - design tokens ============ */
+
+:root {
+  --ink: #0e0c0a;
+  --paper: #f0ead6;
+  --paper-deep: #e6dec3;
+  --rust: #b84a1f;
+  --rust-deep: #8e3614;
+  --ochre: #c48f1a;
+  --ink-soft: rgba(14, 12, 10, 0.7);
+  --ink-faint: rgba(14, 12, 10, 0.35);
+
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "EB Garamond", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-hand: "Caveat", "JetBrains Mono", monospace;
+
+  --measure: 68ch;
+  --gutter: clamp(1.2rem, 4vw, 4rem);
+}

@@ -1,62 +1,42 @@
-# Astro Starter Kit: Blog
+# donzellidiaz.com
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/templates/tree/main/astro-blog-starter-template)
+Personal site and journal of Lorenzo Donzelli Diaz — fullstack & AI engineer.
 
-![Astro Template Preview](https://github.com/withastro/astro/assets/2244813/ff10799f-a816-4703-b967-c78997e8323d)
+A single-page editorial landing that routes to two things: the **journal** (`/blog`, long-form MDX essays) and the **CV** (`/about`).
 
-<!-- dash-content-start -->
+## Stack
 
-Create a blog with Astro and deploy it on Cloudflare Workers as a [static website](https://developers.cloudflare.com/workers/static-assets/).
+- [Astro](https://astro.build) 7, fully static output
+- MDX for posts, with a custom component library (figures, marginalia, callouts, charts, math)
+- KaTeX for math, Shiki for code, self-hosted fonts (Cormorant Garamond, EB Garamond, JetBrains Mono, Caveat)
+- Deployed to Cloudflare Workers as static assets via `wrangler deploy` (auto-deploys on push to `main`)
 
-Features:
+## Writing a post
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+Posts live in `src/content/blog/<slug>/index.mdx` with co-located images. Minimum frontmatter:
 
-<!-- dash-content-end -->
-
-## Getting Started
-
-Outside of this repo, you can start a new project with this template using [C3](https://developers.cloudflare.com/pages/get-started/c3/) (the `create-cloudflare` CLI):
-
-```bash
-npm create cloudflare@latest -- --template=cloudflare/templates/astro-blog-starter-template
+```yaml
+---
+title: "Title"
+description: "One-line deck."
+pubDate: 2026-09-22
+---
 ```
 
-A live public deployment of this template is available at [https://astro-blog-starter-template.templates.workers.dev](https://astro-blog-starter-template.templates.workers.dev)
+Optional: `updatedDate`, `cover` + `coverAlt` (+ `coverCaption`), `series` + `seriesOrder`, `tags`, `draft: true` (excluded from builds unless `INCLUDE_DRAFTS=1`).
 
-## 🚀 Project Structure
+Series are declared in `src/content/series/<id>.yaml`.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Commands
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                           | Action                                           |
-| :-------------------------------- | :----------------------------------------------- |
-| `npm install`                     | Installs dependencies                            |
-| `npm run dev`                     | Starts local dev server at `localhost:4321`      |
-| `npm run build`                   | Build your production site to `./dist/`          |
-| `npm run preview`                 | Preview your build locally, before deploying     |
-| `npm run astro ...`               | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help`         | Get help using the Astro CLI                     |
-| `npm run build && npm run deploy` | Deploy your production site to Cloudflare        |
-
-## 👀 Want to learn more?
-
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+| Command            | Action                                        |
+| :----------------- | :-------------------------------------------- |
+| `npm install`      | Install dependencies                          |
+| `npm run dev`      | Dev server at `localhost:4321`                |
+| `npm run build`    | Production build to `./dist/` (drafts excluded) |
+| `npm run build:drafts` | Build including draft posts (used by tests) |
+| `npm run preview`  | Build and preview locally                     |
+| `npm test`         | Unit tests (Vitest)                           |
+| `npm run test:e2e` | Browser tests (Playwright)                    |
+| `npm run check`    | Type-check                                    |
+| `npm run deploy`   | Build and deploy to Cloudflare                |

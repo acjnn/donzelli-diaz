@@ -1,0 +1,18 @@
+---
+import InkRule from "./InkRule.astro";
+
+interface Props {
+	num: string;
+	title: string;
+	sub?: string;
+}
+
+const { num, title, sub } = Astro.props;
+---
+
+<div class="section-head">
+	<span class="sec-num">{num}</span>
+	<span class="sec-title">{title}</span>
+	{sub && <span class="sec-sub">- {sub}</span>}
+</div>
+<InkRule />

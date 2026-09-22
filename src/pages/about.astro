@@ -1,62 +1,283 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import Base from "../layouts/Base.astro";
+import InkFrame from "../components/InkFrame.astro";
+import InkLink from "../components/InkLink.astro";
+import Marginalia from "../components/Marginalia.astro";
+import SectionHead from "../components/SectionHead.astro";
+import { CV_URL, DOMAIN, EMAIL, GITHUB_URL, LINKEDIN_URL } from "../consts";
+
+const STACK = [
+	{
+		n: "i",
+		name: "Backend",
+		role: "the bones",
+		items: ["Java / Spring", "Python", "Django", "FastAPI", "Celery", "PostgreSQL", "Redis"],
+		note: "where the real arguments happen.",
+	},
+	{
+		n: "ii",
+		name: "Frontend",
+		role: "the surface",
+		items: ["React", "Next.js", "TypeScript", "Tailwind", "HTMX (occasionally)"],
+		note: "kept honest by designers and users.",
+	},
+	{
+		n: "iii",
+		name: "Infrastructure",
+		role: "the room it lives in",
+		items: ["Docker", "Terraform", "DigitalOcean", "GitHub Actions", "Nginx"],
+		note: "boring on purpose.",
+	},
+	{
+		n: "iv",
+		name: "AI · LLM",
+		role: "the new instrument",
+		items: ["OpenAI", "Mistral", "LangChain", "SQL-first AI workflows", "evals"],
+		note: "product-grade, in production.",
+	},
+];
+
+const ROLES = [
+	{
+		yr: "2024 -",
+		place: "Epiphany",
+		where: "Remote, Copenhagen HQ",
+		role: "Fullstack & AI Engineer",
+		impact:
+			"Shipping Django + Next.js apps, SQL-backed AI workflows and Celery-based async pipelines on DigitalOcean, turning Epiphany's product work into reliable production systems.",
+		tags: ["Django", "Next.js", "SQL", "Celery", "DigitalOcean"],
+	},
+	{
+		yr: "2022 - 2024",
+		place: "ArcaFondi",
+		where: "Milano, IT",
+		role: "Backend & R&D Engineer",
+		impact:
+			"Worked across backend and R&D at ArcaFondi, an Italian SGR, building Java services for portfolio, market-data, and internal research workflows with Bloomberg and Morgan Stanley integrations.",
+		tags: ["Java", "Bloomberg API", "Morgan Stanley", "R&D"],
+	},
+	{
+		yr: "2020 - 2022",
+		place: "Intesa Sanpaolo",
+		where: "Italy",
+		role: "Software Engineer",
+		impact:
+			"Built and maintained backend services for banking workflows, focusing on reliability, integrations, and day-to-day production support.",
+		tags: ["Java", "Spring", "Oracle", "high-availability"],
+	},
+];
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage="/blog-placeholder-about.jpg"
+<Base
+	title="About the author"
+	description="Lorenzo Donzelli — fullstack & AI engineer. Six years between Italian fintech and a Copenhagen-based AI company."
+	section="THE AUTHOR"
 >
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
+	<section class="section about" data-screen-label="01 About" style="padding-top: 1.5rem">
+		<SectionHead num="I." title="Identity" sub="a short note from the author" />
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+		<div class="about-grid">
+			<div class="about-col about-col--prose">
+				<p class="dropcap">
+					<span class="cap-letter">B</span>egan in the back-office of Italian finance, Intesa Sanpaolo, then
+					ArcaFondi, wiring Bloomberg and Morgan Stanley feeds into Java services that had to be right by 09:00,
+					every morning, without exception. The discipline stuck. The taste for systems that fail loudly stuck.
+					Now the surface area is wider: Django, Next.js, Celery queues humming on DigitalOcean, and SQL-backed
+					AI workflows stitched out of OpenAI, Mistral, and a great deal of patience.
+				</p>
+				<p class="prose">
+					Italian, with Cuban roots, currently building fully remote at <em>Epiphany</em>, a Copenhagen-based AI
+					company. Off the clock there is a record label, a small one, run out of stubbornness more than
+					business sense. It teaches you the same lesson a production incident teaches you: the work is the
+					work, and nobody is coming to do it for you.
+				</p>
+			</div>
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+			<aside class="about-col about-col--meta">
+				<Marginalia rotate={-2} style="position: absolute; top: -1.5rem; left: 0">
+					↳ &ldquo;fintech-grain, AI-shape&rdquo;
+				</Marginalia>
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+				<div class="pull">
+					<span class="quote-mark">&ldquo;</span>
+					<p>The discipline of a 09:00 trading floor; the appetite of a research lab.</p>
+					<span class="quote-attr">- ed. note</span>
+				</div>
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+				<div class="facts">
+					<div class="fact">
+						<span class="fact-k">Based</span>
+						<span class="fact-v">Milano&nbsp;⇄&nbsp;Bangkok</span>
+					</div>
+					<div class="fact">
+						<span class="fact-k">Years</span>
+						<span class="fact-v">VI</span>
+					</div>
+					<div class="fact">
+						<span class="fact-k">Languages</span>
+						<span class="fact-v">IT · ES · EN</span>
+					</div>
+					<div class="fact">
+						<span class="fact-k">Off-hours</span>
+						<span class="fact-v">a record label, of all things</span>
+					</div>
+				</div>
+			</aside>
+		</div>
+	</section>
+
+	<section class="section stack" data-screen-label="02 Stack">
+		<SectionHead num="II." title="Stack" sub="what is on the workbench" />
+
+		<div class="stack-list">
+			{
+				STACK.map((g) => (
+					<article class="stack-row">
+						<div class="stack-roman">{g.n}.</div>
+						<div class="stack-name">
+							<h3>{g.name}</h3>
+							<span class="stack-role">{g.role}</span>
+						</div>
+						<ul class="stack-items">
+							{g.items.map((it) => (
+								<li>{it}</li>
+							))}
+						</ul>
+						<div class="stack-note">
+							<em>{g.note}</em>
+						</div>
+					</article>
+				))
+			}
+		</div>
+	</section>
+
+	<section class="section exp" data-screen-label="03 Experience">
+		<SectionHead num="III." title="The Ledger" sub="roles, in reverse chronological order" />
+
+		<ol class="exp-list">
+			{
+				ROLES.map((r, i) => (
+					<li class="exp-row">
+						<div class="exp-yr">{r.yr}</div>
+						<div class="exp-spine">
+							<span class="exp-dot" />
+						</div>
+						<div class="exp-body">
+							<div class="exp-head">
+								<h3 class="exp-place">{r.place}</h3>
+								<span class="exp-where">{r.where}</span>
+							</div>
+							<div class="exp-role">{r.role}</div>
+							<p class="exp-impact">{r.impact}</p>
+							<ul class="exp-tags">
+								{r.tags.map((t) => (
+									<li>{t}</li>
+								))}
+							</ul>
+						</div>
+						{i === 0 && (
+							<Marginalia rotate={6} style="position: absolute; right: -0.5rem; top: 0.5rem">
+								← present day
+							</Marginalia>
+						)}
+					</li>
+				))
+			}
+		</ol>
+	</section>
+
+	<section class="section contact" data-screen-label="04 Contact">
+		<SectionHead num="IV." title="Correspondence" sub="the door is open" />
+
+		<div class="contact-grid">
+			<div class="contact-pitch">
+				<p class="contact-line">
+					If you are building something that needs a backend that won&rsquo;t quietly fall over, or an LLM
+					pipeline that won&rsquo;t hallucinate your business away,
+				</p>
+				<p class="contact-line contact-line--big">
+					<em>write.</em>
+				</p>
+			</div>
+
+			<InkFrame class="contact-card">
+				<div class="contact-card__inner">
+					<div class="contact-row">
+						<span class="cap">e-mail</span>
+						<InkLink href={`mailto:${EMAIL}`}>{EMAIL}</InkLink>
+					</div>
+					<div class="contact-row">
+						<span class="cap">linkedin</span>
+						<InkLink href={LINKEDIN_URL} external>/in/lorenzo-donzelli-diaz-71796b94</InkLink>
+					</div>
+					<div class="contact-row">
+						<span class="cap">github</span>
+						<InkLink href={GITHUB_URL} external>{GITHUB_URL.replace("https://", "")}</InkLink>
+					</div>
+					<div class="contact-row">
+						<span class="cap">domain</span>
+						<span class="contact-plain">{DOMAIN}</span>
+					</div>
+
+					<a href={CV_URL} class="cv-btn" target="_blank" rel="noopener noreferrer">
+						<svg
+							class="cv-btn__border"
+							viewBox="0 0 400 200"
+							preserveAspectRatio="none"
+							aria-hidden="true"
+						>
+							<path
+								d="M 6 8 Q 100 4, 200 7 T 396 9 Q 397 60, 395 110 T 394 192 Q 280 196, 180 193 T 5 191 Q 7 130, 6 80 T 6 8 Z"
+								fill="none"
+								stroke="#f0ead6"
+								stroke-width="1.6"
+								stroke-linejoin="round"
+								stroke-linecap="round"
+								vector-effect="non-scaling-stroke"></path>
+							<path
+								d="M 9 11 Q 110 7, 210 10 T 392 13 Q 391 70, 393 120 T 390 188 Q 270 192, 170 189 T 9 187 Q 11 120, 9 70 T 9 11 Z"
+								fill="none"
+								stroke="#f0ead6"
+								stroke-width="1.12"
+								stroke-linejoin="round"
+								stroke-linecap="round"
+								vector-effect="non-scaling-stroke"
+								opacity="0.55"></path>
+						</svg>
+						<span class="cv-btn__label">↓ &nbsp;Download&nbsp;CV&nbsp;(pdf)</span>
+						<span class="cv-btn__sub">Lorenzo&nbsp;Donzelli&nbsp;-&nbsp;2026</span>
+					</a>
+				</div>
+			</InkFrame>
+
+			<div class="contact-aside">
+				<svg
+					style="width: 110px; height: 70px; transform: translateY(-1rem)"
+					viewBox="0 0 140 90"
+					aria-hidden="true"
+				>
+					<g transform="scale(-1,1) translate(-140,0)">
+						<path
+							d="M 10 10 Q 40 30, 60 50 T 110 78"
+							fill="none"
+							stroke="#0e0c0a"
+							stroke-width="1.3"
+							stroke-linecap="round"
+							vector-effect="non-scaling-stroke"></path>
+						<path
+							d="M 100 70 Q 108 76, 112 80 Q 106 78, 98 82"
+							fill="none"
+							stroke="#0e0c0a"
+							stroke-width="1.3"
+							stroke-linecap="round"
+							stroke-linejoin="round"></path>
+					</g>
+				</svg>
+				<Marginalia rotate={-5} style="display: block; margin-top: 0.4rem">
+					replies, usually within a day
+				</Marginalia>
+			</div>
+		</div>
+	</section>
+</Base>

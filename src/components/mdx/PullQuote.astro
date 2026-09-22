@@ -1,0 +1,12 @@
+---
+interface Props {
+	by?: string;
+}
+
+const { by } = Astro.props;
+---
+
+<div class="pullquote">
+	<p><slot /></p>
+	{by && <span class="quote-attr">- {by}</span>}
+</div>

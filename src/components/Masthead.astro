@@ -1,0 +1,28 @@
+---
+import InkRule from "./InkRule.astro";
+
+interface Props {
+	section?: string;
+}
+
+const { section = "A FIELD GUIDE / PORTFOLIO" } = Astro.props;
+const path = Astro.url.pathname;
+const isJournal = path.startsWith("/blog");
+const isAbout = path.startsWith("/about");
+---
+
+<header class="masthead">
+	<div class="mast-l">
+		<a href="/">Donzelli&nbsp;Diaz</a>&nbsp;·&nbsp;Vol.&nbsp;VI&nbsp;·&nbsp;No.&nbsp;01
+	</div>
+	<div class="mast-c">
+		<nav class="mast-nav" aria-label="Primary">
+			<a href="/blog" aria-current={isJournal ? "page" : undefined}>Journal</a>
+			<span aria-hidden="true">/</span>
+			<a href="/about" aria-current={isAbout ? "page" : undefined}>About</a>
+		</nav>
+		<span class="sr-only">{section}</span>
+	</div>
+	<div class="mast-r">MMXXVI · MILANO / BANGKOK</div>
+</header>
+<InkRule class="rule--mast" />

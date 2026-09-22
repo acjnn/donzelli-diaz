@@ -1,37 +1,43 @@
 {
   "name": "donzelli-diaz",
-  "description": "Build a personal website, blog, or portfolio with Astro.",
-  "cloudflare": {
-    "label": "Astro Framework Starter",
-    "products": [
-      "Workers"
-    ],
-    "categories": [],
-    "icon_urls": [
-      "https://imagedelivery.net/wSMYJvS3Xw-n339CbDyDIA/5ca0ca32-e897-4699-d4c1-6b680512f000/public"
-    ],
-    "preview_image_url": "https://imagedelivery.net/wSMYJvS3Xw-n339CbDyDIA/33bbbf02-eda2-4d3f-b244-c27a280f3900/public",
-    "publish": true
-  },
+  "description": "Personal site and journal of Lorenzo Donzelli Diaz.",
+  "type": "module",
   "dependencies": {
-    "@astrojs/cloudflare": "12.5.0",
-    "@astrojs/mdx": "4.2.4",
-    "@astrojs/rss": "4.0.11",
-    "@astrojs/sitemap": "3.3.0",
-    "astro": "5.7.4",
-    "typescript": "5.8.3"
+    "@astrojs/mdx": "^8.0.1",
+    "@astrojs/preact": "^6.0.5",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
+    "@observablehq/plot": "^0.6.17",
+    "astro": "^7.3.3",
+    "katex": "^0.18.7",
+    "preact": "^10.28.2",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
+    "remark-reading-time": "^2.1.0",
+    "sharp": "^0.35.4",
+    "typescript": "^7.0.2"
   },
   "devDependencies": {
-    "wrangler": "4.16.1"
+    "@astrojs/markdown-remark": "^7.3.1",
+    "@lhci/cli": "^0.15.1",
+    "@playwright/test": "^1.63.0",
+    "axe-core": "^4.13.0",
+    "html-validate": "^11.16.0",
+    "vitest": "^5.0.1",
+    "wrangler": "^4.135.0"
   },
   "scripts": {
     "astro": "astro",
     "build": "astro build",
-    "cf-typegen": "wrangler types",
-    "check": "astro build && tsc && wrangler deploy --dry-run",
-    "deploy": "wrangler deploy",
+    "build:drafts": "INCLUDE_DRAFTS=1 astro build",
+    "check": "astro check && tsc --noEmit",
     "dev": "astro dev",
-    "preview": "astro build && wrangler dev"
-  },
-  "type": "module"
+    "preview": "astro build && astro preview",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "test:html": "html-validate \"dist/**/*.html\"",
+    "test:links": "node scripts/check-links.mjs",
+    "test:deploy": "wrangler deploy --dry-run",
+    "deploy": "npm run build && wrangler deploy"
+  }
 }

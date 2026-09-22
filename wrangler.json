@@ -1,14 +1,12 @@
 {
+  "$schema": "node_modules/wrangler/config-schema.json",
   "name": "donzelli-diaz",
-  "compatibility_date": "2025-04-01",
-  "compatibility_flags": ["nodejs_compat"],
-  "main": "./dist/_worker.js/index.js",
+  "compatibility_date": "2026-09-22",
   "assets": {
     "directory": "./dist",
-    "binding": "ASSETS"
+    "not_found_handling": "404-page"
   },
   "observability": {
     "enabled": true
-  },
-  "upload_source_maps": true
+  }
 }

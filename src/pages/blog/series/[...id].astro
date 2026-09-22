@@ -1,0 +1,76 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../../layouts/Base.astro";
+import SectionHead from "../../../components/SectionHead.astro";
+import FormattedDate from "../../../components/FormattedDate.astro";
+import { getPosts, readingTime, roman, seriesPosts } from "../../../lib/posts";
+
+export async function getStaticPaths() {
+	const allSeries = await getCollection("series");
+	const posts = await getPosts();
+	return allSeries
+		.map((s) => ({
+			params: { id: s.id },
+			props: { series: s, parts: seriesPosts(posts, s.id) },
+		}))
+		.filter((entry) => entry.props.parts.length > 0);
+}
+
+const { series, parts } = Astro.props;
+---
+
+<Base
+	title={series.data.title}
+	description={series.data.description}
+	section="THE JOURNAL / SERIES"
+>
+	<section class="section" style="padding-top: 1.5rem">
+		<SectionHead num="§" title={series.data.title} sub="a series" />
+		<p class="series-desc">{series.data.description}</p>
+
+		{
+			parts.length === 0 ? (
+				<p class="series-empty">
+					<em>No installments yet — the first is being set in type.</em>
+				</p>
+			) : (
+				<ol class="dispatch-list">
+					{parts.map((post, i) => {
+						const rt = readingTime(post);
+						return (
+							<li class="dispatch">
+								<a href={`/blog/${post.id}/`}>
+									<span class="dispatch__num">{roman(i + 1)}.</span>
+									<span class="dispatch__date">
+										<FormattedDate date={post.data.pubDate} />
+									</span>
+									<div class="dispatch__body">
+										<h3 class="dispatch__title">{post.data.title}</h3>
+										<p class="dispatch__deck">{post.data.description}</p>
+									</div>
+									{rt && <span class="dispatch__time">{rt} min</span>}
+								</a>
+							</li>
+						);
+					})}
+				</ol>
+			)
+		}
+	</section>
+</Base>
+
+<style>
+	.series-desc {
+		font-family: var(--font-body);
+		font-style: italic;
+		font-size: 1.15rem;
+		color: var(--ink-soft);
+		max-width: 56ch;
+		margin: 1rem 0 2rem;
+	}
+	.series-empty {
+		font-family: var(--font-body);
+		font-size: 1.1rem;
+		color: var(--ink-soft);
+	}
+</style>

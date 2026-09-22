@@ -1,0 +1,19 @@
+---
+import InkFrame from "../InkFrame.astro";
+
+interface Props {
+	label?: string;
+	kind?: "note" | "warning";
+}
+
+const { label, kind = "note" } = Astro.props;
+---
+
+<div class={`callout callout--${kind}`}>
+	<InkFrame stroke={kind === "warning" ? "#b84a1f" : "#0e0c0a"}>
+		<div style="padding: 0.2rem 0.4rem">
+			<span class="callout-label">{label ?? (kind === "warning" ? "warning" : "note")}</span>
+			<slot />
+		</div>
+	</InkFrame>
+</div>
