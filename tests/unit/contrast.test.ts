@@ -31,13 +31,16 @@ describe("palette contrast (WCAG AA)", () => {
 	it("paper on ink passes AA for normal text (>= 4.5)", () => {
 		expect(contrast(hex("paper"), hex("ink"))).toBeGreaterThanOrEqual(4.5);
 	});
-	it("rust on paper passes AA for large text (>= 3.0)", () => {
-		expect(contrast(hex("rust"), hex("paper"))).toBeGreaterThanOrEqual(3.0);
+	it("accent on paper passes AA for normal text (>= 4.5)", () => {
+		expect(contrast(hex("accent"), hex("paper"))).toBeGreaterThanOrEqual(4.5);
 	});
-	it("rust-deep on paper passes AA for normal text (>= 4.5)", () => {
-		expect(contrast(hex("rust-deep"), hex("paper"))).toBeGreaterThanOrEqual(4.5);
+	it("accent-deep on paper passes AA for normal text (>= 4.5)", () => {
+		expect(contrast(hex("accent-deep"), hex("paper"))).toBeGreaterThanOrEqual(4.5);
 	});
-	it("ochre on ink passes AA for large text (>= 3.0)", () => {
-		expect(contrast(hex("ochre"), hex("ink"))).toBeGreaterThanOrEqual(3.0);
+	it("accent-soft on ink passes AA for normal text (>= 4.5)", () => {
+		expect(contrast(hex("accent-soft"), hex("ink"))).toBeGreaterThanOrEqual(4.5);
+	});
+	it("ink on paper-deep passes AA for normal text (>= 4.5)", () => {
+		expect(contrast(hex("ink"), hex("paper-deep"))).toBeGreaterThanOrEqual(4.5);
 	});
 });

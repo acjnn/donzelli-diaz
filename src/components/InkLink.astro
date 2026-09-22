@@ -1,4 +1,6 @@
 ---
+import { ACCENT } from "../lib/palette";
+
 interface Props {
 	href: string;
 	external?: boolean;
@@ -12,14 +14,13 @@ const { href, external = false, class: className } = Astro.props;
 	class:list={["ink-link", className]}
 	href={href}
 	{...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-	style="--ink: #b84a1f"
 >
 	<span><slot /></span>
 	<svg class="ink-link__rule" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true">
 		<path
 			d="M 2 6 Q 25 2, 50 7 T 100 5 Q 130 9, 160 4 T 198 7"
 			fill="none"
-			stroke="#b84a1f"
+			stroke={ACCENT}
 			stroke-width="2"
 			stroke-linecap="round"
 			stroke-linejoin="round"

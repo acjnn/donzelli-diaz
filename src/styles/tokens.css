@@ -2,13 +2,15 @@
 
 :root {
   --ink: #0e0c0a;
-  --paper: #f0ead6;
-  --paper-deep: #e6dec3;
-  --rust: #b84a1f;
-  --rust-deep: #8e3614;
-  --ochre: #c48f1a;
+  --paper: #e7ebef;
+  --paper-deep: #dbdfe3;
+  --accent: #9a2740;
+  --accent-deep: #6e1c30;
+  --accent-soft: #c98a99;
   --ink-soft: rgba(14, 12, 10, 0.7);
   --ink-faint: rgba(14, 12, 10, 0.35);
+  --paper-soft: rgba(231, 235, 239, 0.6);
+  --paper-faint: rgba(231, 235, 239, 0.18);
 
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-body: "EB Garamond", Georgia, serif;

@@ -17,12 +17,12 @@
   align-items: baseline;
   font-family: var(--font-mono);
   font-size: 0.7rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  text-transform: none;
   color: var(--ink-soft);
 }
 .post-kicker .post-no {
-  color: var(--rust);
+  color: var(--ink);
   font-weight: 600;
 }
 .post-kicker a {
@@ -30,7 +30,7 @@
   text-decoration: none;
 }
 .post-kicker a:hover {
-  color: var(--rust);
+  color: var(--accent);
 }
 
 .post-title {
@@ -70,9 +70,9 @@
   padding-top: 0.7rem;
   border-top: 1px dashed var(--ink-faint);
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
   color: var(--ink-soft);
 }
 .post-meta .post-tags {
@@ -100,7 +100,7 @@
   margin-top: 0.5rem;
   font-family: var(--font-hand);
   font-size: 1.05rem;
-  color: var(--rust);
+  color: var(--ink-soft);
 }
 
 /* ============ PROSE BODY ============ */
@@ -128,18 +128,18 @@
   line-height: 0.8;
   float: left;
   padding: 0.08em 0.12em 0 0;
-  color: var(--rust);
+  color: var(--ink);
 }
 
 .prose a {
-  color: var(--rust-deep);
+  color: var(--accent-deep);
   text-decoration: underline;
   text-decoration-style: dotted;
   text-underline-offset: 3px;
   transition: color 0.2s ease;
 }
 .prose a:hover {
-  color: var(--rust);
+  color: var(--accent);
 }
 
 .prose h2,
@@ -165,7 +165,7 @@
   display: block;
   width: 3.2rem;
   height: 2px;
-  background: var(--rust);
+  background: var(--ink);
   margin-bottom: 0.9rem;
   transform: rotate(-0.6deg);
 }
@@ -192,13 +192,13 @@
   overflow-wrap: break-word;
 }
 .prose li::marker {
-  color: var(--rust);
+  color: var(--ink);
 }
 
 .prose blockquote {
   margin: 2rem 0;
   padding: 0.2rem 0 0.2rem 1.4rem;
-  border-left: 2px solid var(--rust);
+  border-left: 2px solid var(--ink);
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 500;
@@ -253,27 +253,27 @@
   display: block;
   margin: -0.4rem 0 0.8rem;
   font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(240, 234, 214, 0.55);
-  border-bottom: 1px dashed rgba(240, 234, 214, 0.25);
+  font-size: 0.7rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--paper-soft);
+  border-bottom: 1px dashed var(--paper-faint);
   padding-bottom: 0.5rem;
 }
 /* Shiki css-variables theme mapped onto the ink palette */
 .prose pre,
 .prose code {
-  --shiki-foreground: #f0ead6;
+  --shiki-foreground: var(--paper);
   --shiki-background: var(--ink);
-  --shiki-token-constant: #c48f1a;
-  --shiki-token-string: #d8a24a;
-  --shiki-token-comment: rgba(240, 234, 214, 0.45);
-  --shiki-token-keyword: #e0784a;
-  --shiki-token-parameter: #f0ead6;
-  --shiki-token-function: #f0ead6;
-  --shiki-token-string-expression: #d8a24a;
-  --shiki-token-punctuation: rgba(240, 234, 214, 0.7);
-  --shiki-token-link: #e0784a;
+  --shiki-token-constant: var(--accent-soft);
+  --shiki-token-string: var(--paper);
+  --shiki-token-comment: var(--paper-soft);
+  --shiki-token-keyword: var(--accent-soft);
+  --shiki-token-parameter: var(--paper);
+  --shiki-token-function: var(--paper);
+  --shiki-token-string-expression: var(--paper);
+  --shiki-token-punctuation: var(--paper-soft);
+  --shiki-token-link: var(--accent-soft);
 }
 
 /* ============ TABLES ============ */
@@ -290,15 +290,15 @@
 .prose caption {
   font-family: var(--font-hand);
   font-size: 1.05rem;
-  color: var(--rust);
+  color: var(--ink-soft);
   text-align: left;
   margin-bottom: 0.5rem;
 }
 .prose th {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
   color: var(--ink-soft);
   text-align: left;
   padding: 0.5rem 0.8rem;
@@ -327,7 +327,7 @@
   margin-top: 0.5rem;
   font-family: var(--font-hand);
   font-size: 1.05rem;
-  color: var(--rust);
+  color: var(--ink-soft);
 }
 .prose figure.figure--wide {
   max-width: min(92vw, 60rem);
@@ -354,10 +354,10 @@
 .prose .aside .aside-label {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.64rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--rust);
+  font-size: 0.7rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--ink-soft);
   margin-bottom: 0.3rem;
 }
 
@@ -371,7 +371,7 @@
   font-weight: 500;
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   line-height: 1.15;
-  color: var(--ochre);
+  color: var(--ink);
   margin: 0;
   text-wrap: balance;
 }
@@ -379,9 +379,9 @@
   display: block;
   margin-top: 0.6rem;
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
   color: var(--ink-soft);
 }
 
@@ -393,10 +393,10 @@
 .prose .callout .callout-label {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--rust);
+  font-size: 0.7rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--ink-soft);
   margin-bottom: 0.4rem;
 }
 .prose .callout p {
@@ -442,7 +442,7 @@
 .prose sup a {
   text-decoration: none;
   font-family: var(--font-mono);
-  font-size: 0.72em;
+  font-size: 0.7rem;
 }
 .prose .footnote-backref {
   text-decoration: none;
@@ -461,12 +461,12 @@
   margin-top: 0.5rem;
   font-family: var(--font-hand);
   font-size: 1.05rem;
-  color: var(--rust);
+  color: var(--ink-soft);
 }
 .prose .chart .chart-axis,
 .prose .chart .chart-tick {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   fill: var(--ink-soft);
 }
@@ -476,23 +476,23 @@
 }
 .prose .chart .chart-line {
   fill: none;
-  stroke: var(--rust);
+  stroke: var(--accent);
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 .prose .chart .chart-bar {
-  fill: var(--rust);
+  fill: var(--accent);
 }
 .prose .chart .chart-dot {
   fill: var(--paper);
-  stroke: var(--rust);
+  stroke: var(--accent);
   stroke-width: 1.6;
 }
 .prose .chart .chart-annotation {
   font-family: var(--font-hand);
   font-size: 15px;
-  fill: var(--rust);
+  fill: var(--ink);
 }
 
 /* ============ POST NAV (prev / next) ============ */
@@ -512,9 +512,9 @@
 .post-nav .post-nav__dir {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
   color: var(--ink-soft);
   margin-bottom: 0.3rem;
 }
@@ -526,7 +526,7 @@
   letter-spacing: -0.01em;
 }
 .post-nav a:hover .post-nav__title {
-  color: var(--rust);
+  color: var(--accent);
 }
 .post-nav .post-nav__next {
   text-align: right;

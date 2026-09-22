@@ -87,7 +87,7 @@ const labelEvery = Math.max(1, Math.ceil(points.length / maxLabels));
 			const p = points[idx];
 			return (
 				<g>
-					<line x1={p.cx} x2={p.cx} y1={MARGIN.top} y2={MARGIN.top + plotH} stroke="#b84a1f" stroke-width="0.8" stroke-dasharray="3 4" />
+					<line x1={p.cx} x2={p.cx} y1={MARGIN.top} y2={MARGIN.top + plotH} stroke="var(--accent)" stroke-width="0.8" stroke-dasharray="3 4" />
 					<text class="chart-annotation" x={Math.min(p.cx + 6, width - 120)} y={MARGIN.top + 14 + i * 18}>
 						{a.label}
 					</text>

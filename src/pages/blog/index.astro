@@ -103,10 +103,10 @@ for (const post of posts) {
 	}
 	.toc-year__label {
 		font-family: var(--font-display);
-		font-style: italic;
-		font-weight: 500;
+		font-style: normal;
+		font-weight: 600;
 		font-size: clamp(1.6rem, 3vw, 2.2rem);
-		color: var(--ochre);
+		color: var(--ink);
 		margin: 2rem 0 0.4rem;
 	}
 	.toc-year:first-child .toc-year__label {
@@ -124,8 +124,8 @@ for (const post of posts) {
 	.toc-side__head {
 		font-family: var(--font-mono);
 		font-size: 0.7rem;
-		letter-spacing: 0.18em;
-		text-transform: uppercase;
+		letter-spacing: 0.01em;
+		text-transform: none;
 		color: var(--ink-soft);
 		margin: 0 0 0.8rem;
 	}
@@ -146,7 +146,7 @@ for (const post of posts) {
 		text-decoration: none;
 	}
 	.toc-series a:hover {
-		color: var(--rust);
+		color: var(--accent);
 	}
 	.toc-series__desc {
 		display: block;

@@ -1,11 +1,13 @@
 ---
+import { INK } from "../lib/palette";
+
 interface Props {
 	class?: string;
 	stroke?: string;
 	inset?: number;
 }
 
-const { class: className, stroke = "#0e0c0a", inset = 0 } = Astro.props;
+const { class: className, stroke = INK, inset = 0 } = Astro.props;
 ---
 
 <div class:list={["ink-frame", className]}>

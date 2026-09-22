@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "preact/hooks";
 import * as Plot from "@observablehq/plot";
+import { ACCENT, INK, PAPER } from "../../lib/palette";
 
 interface Props {
 	data: Record<string, unknown>[];
@@ -9,9 +10,6 @@ interface Props {
 	title?: string;
 	caption?: string;
 }
-
-const INK = "#0e0c0a";
-const RUST = "#b84a1f";
 
 export default function InteractiveChart({
 	data,
@@ -27,10 +25,10 @@ export default function InteractiveChart({
 		if (!ref.current) return;
 		const mark =
 			kind === "bar"
-				? Plot.barY(data, { x, y, fill: RUST, tip: true })
+				? Plot.barY(data, { x, y, fill: ACCENT, tip: true })
 				: kind === "scatter"
-					? Plot.dot(data, { x, y, stroke: RUST, fill: "#f0ead6", tip: true })
-					: Plot.lineY(data, { x, y, stroke: RUST, strokeWidth: 2, tip: true });
+					? Plot.dot(data, { x, y, stroke: ACCENT, fill: PAPER, tip: true })
+					: Plot.lineY(data, { x, y, stroke: ACCENT, strokeWidth: 2, tip: true });
 		const plot = Plot.plot({
 			width: Math.min(ref.current.clientWidth, 720),
 			height: 360,
@@ -38,7 +36,7 @@ export default function InteractiveChart({
 				background: "transparent",
 				color: INK,
 				fontFamily: "'JetBrains Mono', ui-monospace, monospace",
-				fontSize: "10px",
+				fontSize: "11px",
 			},
 			grid: true,
 			marks: [mark],

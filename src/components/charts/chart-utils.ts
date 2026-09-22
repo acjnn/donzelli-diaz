@@ -17,10 +17,6 @@ export interface ChartProps {
 	annotations?: ChartAnnotation[];
 }
 
-export const INK = "#0e0c0a";
-export const RUST = "#b84a1f";
-export const OCHRE = "#c48f1a";
-
 export interface Scale {
 	min: number;
 	max: number;

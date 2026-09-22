@@ -1,11 +1,13 @@
 ---
+import { INK } from "../lib/palette";
+
 interface Props {
 	rotate?: number;
 	color?: string;
 	class?: string;
 }
 
-const { rotate = -3, color = "#b84a1f", class: className } = Astro.props;
+const { rotate = -3, color = INK, class: className } = Astro.props;
 ---
 
 <span
