@@ -408,15 +408,6 @@
   display: block;
   margin-bottom: -0.4rem;
 }
-.pull .quote-attr {
-  display: block;
-  margin-top: 0.6rem;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.01em;
-  text-transform: none;
-  color: var(--ink-soft);
-}
 
 .facts {
   display: grid;
@@ -488,7 +479,7 @@
 
 .stack-row {
   display: grid;
-  grid-template-columns: 2.4rem minmax(13rem, 1.3fr) minmax(0, 2fr) minmax(0, 0.9fr);
+  grid-template-columns: 2.4rem minmax(13rem, 1.3fr) minmax(0, 2.9fr);
   gap: clamp(0.8rem, 2vw, 2rem);
   align-items: baseline;
   padding: 1.3rem 0;
@@ -517,12 +508,6 @@
   line-height: 1;
   white-space: nowrap;
 }
-.stack-name .stack-role {
-  font-family: var(--font-body);
-  font-style: normal;
-  font-size: 0.9rem;
-  color: var(--paper-soft);
-}
 
 .stack-items {
   list-style: none;
@@ -544,15 +529,6 @@
   position: absolute;
   right: -0.05rem;
   color: var(--paper-soft);
-}
-
-.stack-note {
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  color: var(--paper-soft);
-  font-style: normal;
-  text-align: right;
-  line-height: 1.4;
 }
 
 /* ============ EXPERIENCE ============ */
@@ -1063,12 +1039,8 @@
   .stack-name h3 {
     white-space: normal;
   }
-  .stack-row .stack-items,
-  .stack-row .stack-note {
+  .stack-row .stack-items {
     grid-column: 1 / -1;
-  }
-  .stack-row .stack-note {
-    text-align: left;
   }
   .exp-row {
     grid-template-columns: 5rem 1.5rem 1fr;

@@ -22,7 +22,7 @@ const { series, parts } = Astro.props;
 <Base
 	title={series.data.title}
 	description={series.data.description}
-	section="THE JOURNAL / SERIES"
+	section="BLOG / SERIES"
 >
 	<section class="section" style="padding-top: 1.5rem">
 		<SectionHead num="§" title={series.data.title} sub="a series" />
@@ -31,7 +31,7 @@ const { series, parts } = Astro.props;
 		{
 			parts.length === 0 ? (
 				<p class="series-empty">
-					<em>No installments yet — the first is being set in type.</em>
+					<em>No posts in this series yet.</em>
 				</p>
 			) : (
 				<ol class="dispatch-list">

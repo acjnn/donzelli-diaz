@@ -10,30 +10,22 @@ const STACK = [
 	{
 		n: "i",
 		name: "Backend",
-		role: "the bones",
 		items: ["Java / Spring", "Python", "Django", "FastAPI", "Celery", "PostgreSQL", "Redis"],
-		note: "where the real arguments happen.",
 	},
 	{
 		n: "ii",
 		name: "Frontend",
-		role: "the surface",
 		items: ["React", "Next.js", "TypeScript", "Tailwind", "HTMX (occasionally)"],
-		note: "kept honest by designers and users.",
 	},
 	{
 		n: "iii",
 		name: "Infrastructure",
-		role: "the room it lives in",
 		items: ["Docker", "Terraform", "DigitalOcean", "GitHub Actions", "Nginx"],
-		note: "boring on purpose.",
 	},
 	{
 		n: "iv",
 		name: "AI · LLM",
-		role: "the new instrument",
 		items: ["OpenAI", "Mistral", "LangChain", "SQL-first AI workflows", "evals"],
-		note: "product-grade, in production.",
 	},
 ];
 
@@ -69,39 +61,31 @@ const ROLES = [
 ---
 
 <Base
-	title="About the author"
+	title="About"
 	description="Lorenzo Donzelli — fullstack & AI engineer. Six years between Italian fintech and a Copenhagen-based AI company."
-	section="THE AUTHOR"
+	section="ABOUT"
 >
 	<section class="section about" data-screen-label="01 About" style="padding-top: 1.5rem">
-		<SectionHead num="I." title="Identity" sub="a short note from the author" />
+		<SectionHead num="I." title="About Me" />
 
 		<div class="about-grid">
 			<div class="about-col about-col--prose">
 				<p class="dropcap">
-					<span class="cap-letter">B</span>egan in the back-office of Italian finance, Intesa Sanpaolo, then
-					ArcaFondi, wiring Bloomberg and Morgan Stanley feeds into Java services that had to be right by 09:00,
-					every morning, without exception. The discipline stuck. The taste for systems that fail loudly stuck.
-					Now the surface area is wider: Django, Next.js, Celery queues humming on DigitalOcean, and SQL-backed
-					AI workflows stitched out of OpenAI, Mistral, and a great deal of patience.
+					<span class="cap-letter">I</span> started out in Italian finance, at Intesa Sanpaolo and then ArcaFondi,
+					building Java services that pulled in Bloomberg and Morgan Stanley data and had to be right by 09:00
+					every morning. Now I work across more of the stack: Django and Next.js apps, Celery queues on
+					DigitalOcean, and SQL-backed AI workflows built on OpenAI and Mistral.
 				</p>
 				<p class="prose">
-					Italian, with Cuban roots, currently building fully remote at <em>Epiphany</em>, a Copenhagen-based AI
-					company. Off the clock there is a record label, a small one, run out of stubbornness more than
-					business sense. It teaches you the same lesson a production incident teaches you: the work is the
-					work, and nobody is coming to do it for you.
+					I&rsquo;m Italian with Cuban roots, and I work fully remote for <em>Epiphany</em>, a Copenhagen-based AI
+					company. Outside work I run a small record label, mostly out of stubbornness.
 				</p>
 			</div>
 
 			<aside class="about-col about-col--meta">
-				<Marginalia rotate={-2} style="position: absolute; top: -1.5rem; left: 0">
-					↳ &ldquo;fintech-grain, AI-shape&rdquo;
-				</Marginalia>
-
 				<div class="pull">
 					<span class="quote-mark">&ldquo;</span>
-					<p>The discipline of a 09:00 trading floor; the appetite of a research lab.</p>
-					<span class="quote-attr">- ed. note</span>
+					<p>I like systems that fail loudly.</p>
 				</div>
 
 				<div class="facts">
@@ -119,7 +103,7 @@ const ROLES = [
 					</div>
 					<div class="fact">
 						<span class="fact-k">Off-hours</span>
-						<span class="fact-v">a record label, of all things</span>
+						<span class="fact-v">a small record label</span>
 					</div>
 				</div>
 			</aside>
@@ -127,7 +111,7 @@ const ROLES = [
 	</section>
 
 	<section class="section stack" data-screen-label="02 Stack">
-		<SectionHead num="II." title="Stack" sub="what is on the workbench" />
+		<SectionHead num="II." title="Stack" />
 
 		<div class="stack-list">
 			{
@@ -136,16 +120,12 @@ const ROLES = [
 						<div class="stack-roman">{g.n}.</div>
 						<div class="stack-name">
 							<h3>{g.name}</h3>
-							<span class="stack-role">{g.role}</span>
 						</div>
 						<ul class="stack-items">
 							{g.items.map((it) => (
 								<li>{it}</li>
 							))}
 						</ul>
-						<div class="stack-note">
-							<em>{g.note}</em>
-						</div>
 					</article>
 				))
 			}
@@ -153,7 +133,7 @@ const ROLES = [
 	</section>
 
 	<section class="section exp" data-screen-label="03 Experience">
-		<SectionHead num="III." title="The Ledger" sub="roles, in reverse chronological order" />
+		<SectionHead num="III." title="Experience" />
 
 		<ol class="exp-list">
 			{
@@ -188,7 +168,7 @@ const ROLES = [
 	</section>
 
 	<section class="section contact" data-screen-label="04 Contact">
-		<SectionHead num="IV." title="Correspondence" sub="the door is open" />
+		<SectionHead num="IV." title="Contact" />
 
 		<div class="contact-grid">
 			<div class="contact-pitch">

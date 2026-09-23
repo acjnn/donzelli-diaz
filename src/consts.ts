@@ -2,7 +2,7 @@
 
 export const SITE_TITLE = "Donzelli Diaz";
 export const SITE_DESCRIPTION =
-  "The personal journal of Lorenzo Donzelli Diaz — fullstack & AI engineer. Essays on backend systems, LLM pipelines, and the craft of shipping.";
+  "The personal blog of Lorenzo Donzelli Diaz — fullstack & AI engineer. Posts on backend systems, LLM pipelines, and the craft of shipping.";
 export const SITE_AUTHOR = "Lorenzo Donzelli Diaz";
 
 export const EMAIL = "lorenzodonzelli93@gmail.com";

@@ -27,16 +27,16 @@ for (const post of posts) {
 }
 ---
 
-<Base title="The Journal" description="Long-form dispatches on backend systems, LLM pipelines, and the craft of shipping." section="THE JOURNAL">
+<Base title="Blog" description="Long-form posts on backend systems, LLM pipelines, and the craft of shipping." section="BLOG">
 	<section class="section" style="padding-top: 1.5rem">
-		<SectionHead num="§" title="The Journal" sub="dispatches, in reverse chronological order" />
+		<SectionHead num="§" title="Blog" />
 
 		<div class="toc-grid">
 			<div class="toc-main">
 				{
 					posts.length === 0 && (
 						<p class="toc-empty">
-							<em>The presses are warming up. The first dispatch is being set in type.</em>
+							<em>No posts yet.</em>
 						</p>
 					)
 				}

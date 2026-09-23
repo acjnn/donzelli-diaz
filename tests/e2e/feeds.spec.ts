@@ -47,7 +47,7 @@ test.describe("feeds and discovery", () => {
 		expect(res.status()).toBe(404);
 
 		await page.goto("/this-page-does-not-exist");
-		await expect(page.locator(".errata__title")).toHaveText("Lost folio");
+		await expect(page.locator(".errata__title")).toHaveText("Page not found");
 		const bg = await page.evaluate(() => getComputedStyle(document.querySelector(".page")!).backgroundColor);
 		expect(bg).not.toBe("rgba(0, 0, 0, 0)"); // paper background applied
 	});
