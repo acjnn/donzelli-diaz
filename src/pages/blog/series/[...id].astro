@@ -24,7 +24,7 @@ const { series, parts } = Astro.props;
 	description={series.data.description}
 	section="BLOG / SERIES"
 >
-	<section class="section" style="padding-top: 1.5rem">
+	<section class="section" style="padding-top: clamp(1.5rem, 3vw, 2.6rem)">
 		<SectionHead num="§" title={series.data.title} sub="a series" />
 		<p class="series-desc">{series.data.description}</p>
 

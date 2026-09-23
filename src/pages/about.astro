@@ -65,7 +65,7 @@ const ROLES = [
 	description="Lorenzo Donzelli — fullstack & AI engineer. Six years between Italian fintech and a Copenhagen-based AI company."
 	section="ABOUT"
 >
-	<section class="section about" data-screen-label="01 About" style="padding-top: 1.5rem">
+	<section class="section about" data-screen-label="01 About" style="padding-top: clamp(1.5rem, 3vw, 2.6rem)">
 		<SectionHead num="I." title="About Me" />
 
 		<div class="about-grid">
@@ -157,7 +157,7 @@ const ROLES = [
 							</ul>
 						</div>
 						{i === 0 && (
-							<Marginalia rotate={6} style="position: absolute; right: -0.5rem; top: 0.5rem">
+							<Marginalia rotate={6} class="exp-note">
 								← present day
 							</Marginalia>
 						)}

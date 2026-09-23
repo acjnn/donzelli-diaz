@@ -8,13 +8,31 @@ interface Props {
 	caption?: string;
 	credit?: string;
 	wide?: boolean;
+	/** Sit the picture beside the following text. Use for small, soft source files. */
+	side?: "left" | "right";
+	/**
+	 * photo: cap the height so portraits don't tower, and keep the color.
+	 * chart: a white or transparent source field, knocked back into the paper.
+	 */
+	tone?: "photo" | "chart";
 }
 
-const { src, alt, caption, credit, wide = false } = Astro.props;
+const { src, alt, caption, credit, wide = false, side, tone } = Astro.props;
 const isRemote = typeof src === "string";
 ---
 
-<figure class:list={[{ "figure--wide": wide }]}>
+<figure
+	class:list={[
+		{
+			"figure--wide": wide && !side,
+			"figure--side": Boolean(side) && tone !== "photo",
+			"figure--left": side === "left" && tone !== "photo",
+			"figure--right": side === "right" && tone !== "photo",
+			"figure--photo": tone === "photo",
+			"figure--chart": tone === "chart",
+		},
+	]}
+>
 	{
 		isRemote ? (
 			<img src={src as string} alt={alt} loading="lazy" decoding="async" />

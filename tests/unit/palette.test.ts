@@ -5,6 +5,8 @@ import {
 	ACCENT,
 	ACCENT_DEEP,
 	ACCENT_SOFT,
+	COLD,
+	COLD_SOFT,
 	INK,
 	PAPER,
 	PAPER_DEEP,
@@ -93,6 +95,8 @@ describe("palette stays off the cream/terracotta cliché", () => {
 		expect(ACCENT.toLowerCase()).toBe(tokenHex("accent"));
 		expect(ACCENT_DEEP.toLowerCase()).toBe(tokenHex("accent-deep"));
 		expect(ACCENT_SOFT.toLowerCase()).toBe(tokenHex("accent-soft"));
+		expect(COLD.toLowerCase()).toBe(tokenHex("cold"));
+		expect(COLD_SOFT.toLowerCase()).toBe(tokenHex("cold-soft"));
 	});
 
 	it("hex literals live only in the palette source, and the old palette is gone", () => {

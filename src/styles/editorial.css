@@ -371,6 +371,7 @@
   font-size: 1.08rem;
   line-height: 1.65;
   margin: 0;
+  padding: 0;
   color: var(--ink);
 }
 .about-col--prose em {
@@ -381,8 +382,6 @@
 .about-col--meta {
   position: relative;
   padding-top: 0.8rem;
-  border-left: 1px dashed var(--ink-faint);
-  padding-left: clamp(1rem, 2vw, 1.6rem);
 }
 
 .pull {
@@ -412,20 +411,13 @@
 .facts {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0.4rem;
-  border-top: 1px solid var(--ink-faint);
-  padding-top: 0.8rem;
+  gap: 0.65rem;
 }
 .fact {
   display: grid;
   grid-template-columns: 6.5rem 1fr;
   gap: 1rem;
   align-items: baseline;
-  padding: 0.25rem 0;
-  border-bottom: 1px dashed var(--ink-faint);
-}
-.fact:last-child {
-  border-bottom: none;
 }
 .fact-k {
   font-family: var(--font-mono);
@@ -466,9 +458,6 @@
 }
 .stack .sec-sub {
   color: var(--paper-soft);
-}
-.stack .rule path {
-  stroke: var(--paper-soft);
 }
 
 .stack-list {
@@ -545,10 +534,15 @@
   grid-template-columns: 8rem 2rem minmax(0, 1fr);
   gap: clamp(0.8rem, 2vw, 1.6rem);
   padding: 1.6rem 0 1.8rem;
-  border-bottom: 1px solid var(--ink-faint);
 }
-.exp-row:last-child {
-  border-bottom: none;
+
+/* The note shares the year cell so it can't open an extra grid row and break the spine. */
+.exp-yr,
+.exp-note {
+  grid-area: 1 / 1;
+}
+.exp-note {
+  align-self: end;
 }
 
 .exp-yr {
@@ -574,6 +568,9 @@
   width: 1px;
   background: repeating-linear-gradient(to bottom, var(--ink) 0 4px, transparent 4px 8px);
   transform: translateX(-50%);
+}
+.exp-row + .exp-row .exp-spine::before {
+  top: -1.6rem;
 }
 .exp-row:last-child .exp-spine::before {
   bottom: 0;
@@ -650,8 +647,8 @@
   letter-spacing: 0.01em;
   text-transform: none;
   color: var(--ink-soft);
-  padding: 0.18rem 0.5rem;
-  border: 1px solid var(--ink-faint);
+  padding: 0.22rem 0.6rem;
+  background: var(--paper-deep);
   border-radius: 999px;
 }
 
@@ -690,18 +687,13 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
+  gap: 0.9rem;
 }
 .contact-row {
   display: grid;
   grid-template-columns: 5.5rem 1fr;
   gap: 0.8rem;
   align-items: baseline;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px dashed var(--ink-faint);
-}
-.contact-row:nth-child(4) {
-  border-bottom: none;
 }
 .contact-plain {
   font-family: var(--font-body);
@@ -836,6 +828,9 @@
   color: var(--ink);
   transition: transform 0.25s ease;
 }
+.door > .ink-frame {
+  position: static;
+}
 .door:hover {
   transform: translateY(-3px) rotate(-0.3deg);
 }
@@ -883,14 +878,11 @@
 /* ============ DISPATCHES (latest posts) ============ */
 .dispatch-list {
   list-style: none;
-  margin: clamp(1.4rem, 3vw, 2.2rem) 0 0;
+  margin: clamp(0.6rem, 1.5vw, 1.2rem) 0 0;
   padding: 0;
 }
-.dispatch {
-  border-bottom: 1px solid var(--ink-faint);
-}
-.dispatch:first-child {
-  border-top: 1px solid var(--ink-faint);
+.dispatch + .dispatch {
+  border-top: 1px solid var(--ink-hair);
 }
 .dispatch a {
   display: grid;
@@ -1016,10 +1008,7 @@
     grid-template-columns: 1fr;
   }
   .about-col--meta {
-    border-left: none;
-    border-top: 1px dashed var(--ink-faint);
-    padding-left: 0;
-    padding-top: 1.2rem;
+    padding-top: 0.4rem;
   }
   .pull {
     padding-top: 0;
@@ -1044,6 +1033,9 @@
   }
   .exp-row {
     grid-template-columns: 5rem 1.5rem 1fr;
+  }
+  .exp-note {
+    display: none;
   }
   .contact-grid {
     grid-template-columns: 1fr;

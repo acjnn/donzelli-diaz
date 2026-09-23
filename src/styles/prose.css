@@ -66,9 +66,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem 1.2rem;
-  margin-top: 1.2rem;
-  padding-top: 0.7rem;
-  border-top: 1px dashed var(--ink-faint);
+  margin-top: 1.4rem;
   font-family: var(--font-mono);
   font-size: 0.7rem;
   letter-spacing: 0.01em;
@@ -81,9 +79,9 @@
   flex-wrap: wrap;
 }
 .post-meta .post-tags span {
-  border: 1px solid var(--ink-faint);
+  background: var(--paper-deep);
   border-radius: 999px;
-  padding: 0.1rem 0.5rem;
+  padding: 0.16rem 0.6rem;
 }
 
 .post-cover {
@@ -95,6 +93,8 @@
   display: block;
   width: 100%;
   height: auto;
+  /* The Copernicus field is a cooler gray than the paper. A hairline makes the edge deliberate. */
+  box-shadow: 0 0 0 1px rgba(14, 12, 10, 0.2);
 }
 .post-cover figcaption {
   margin-top: 0.5rem;
@@ -112,6 +112,7 @@
   font-size: 1.15rem;
   line-height: 1.7;
   color: var(--ink);
+  display: flow-root;
 }
 
 .prose > p {
@@ -287,6 +288,9 @@
   font-size: 0.95rem;
   line-height: 1.5;
 }
+.prose > table {
+  margin: 1.8rem 0;
+}
 .prose caption {
   font-family: var(--font-hand);
   font-size: 1.05rem;
@@ -307,7 +311,7 @@
 }
 .prose td {
   padding: 0.5rem 0.8rem;
-  border-bottom: 1px dashed var(--ink-faint);
+  border-bottom: 1px solid var(--ink-hair);
   vertical-align: top;
 }
 .prose tr:last-child td {
@@ -340,11 +344,61 @@
   margin: 0 auto;
 }
 
+/* Photographs share the column, but a stacked pair must still fit on a laptop screen. */
+.prose figure.figure--photo img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 36rem;
+  height: auto;
+  margin-inline: auto;
+  box-shadow: 0 0 0 1px rgba(14, 12, 10, 0.16);
+}
+
+/* Borrowed charts. White knocks out to the paper; pale gray labels darken enough to read. */
+.prose figure.figure--chart img {
+  mix-blend-mode: multiply;
+}
+
+/* Small source files: keep them near native size and let the paragraph sit beside. */
+.prose figure.figure--side {
+  width: min(100%, 16rem);
+  margin: 1.2rem auto 1.6rem;
+}
+.prose figure.figure--side figcaption {
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+@media (min-width: 760px) {
+  .prose figure.figure--right {
+    float: right;
+    width: 16rem;
+    margin: 0.2rem 0 0.6rem 1.3rem;
+  }
+  .prose figure.figure--left {
+    float: left;
+    width: 16rem;
+    margin: 0.2rem 1.3rem 0.6rem 0;
+  }
+}
+.prose h2,
+.prose h3,
+.prose .chart,
+.prose .pullquote,
+.prose .aside,
+.prose .callout,
+.prose table,
+.prose pre,
+.prose blockquote,
+.prose .footnotes {
+  clear: both;
+}
+
 /* ============ ASIDE / MARGINALIA / PULLQUOTE / CALLOUT ============ */
 .prose .aside {
   margin: 1.6rem 0;
-  padding: 0.9rem 1.1rem;
-  border: 1px dashed var(--ink-faint);
+  padding: 1rem 1.2rem;
+  background: var(--paper-deep);
   font-family: var(--font-hand);
   font-size: 1.15rem;
   line-height: 1.4;
@@ -389,6 +443,9 @@
   position: relative;
   margin: 2rem 0;
   padding: 1.2rem 1.3rem;
+}
+.prose .callout > .ink-frame {
+  position: static;
 }
 .prose .callout .callout-label {
   display: block;
@@ -494,13 +551,163 @@
   font-size: 15px;
   fill: var(--ink);
 }
+.prose .chart .chart-line--total {
+  stroke-width: 2.2;
+}
+.prose .chart .chart-line--greenland,
+.prose .chart .chart-line--discharge {
+  stroke: var(--ink);
+  stroke-width: 1.45;
+}
+.prose .chart .chart-line--antarctica {
+  stroke: var(--ink);
+  stroke-width: 1.45;
+  stroke-dasharray: 5 3.5;
+}
+.prose .chart .chart-line--surface {
+  stroke: var(--accent);
+  stroke-width: 1.55;
+  stroke-dasharray: 5 3.5;
+}
+.prose .chart .chart-band {
+  fill: var(--accent);
+  opacity: 0.14;
+  stroke: none;
+}
+.prose .chart .chart-band--ink {
+  fill: var(--ink);
+  opacity: 0.09;
+}
+.prose .chart .chart-zero {
+  stroke: var(--ink);
+  stroke-opacity: 0.55;
+  stroke-width: 0.9;
+}
+.prose .chart .chart-dot--ink {
+  stroke: var(--ink);
+}
+.prose .chart .chart-frame {
+  fill: none;
+  stroke: var(--ink);
+  stroke-opacity: 0.45;
+  stroke-width: 0.8;
+}
+.prose .chart .chart-line--halo {
+  stroke: var(--paper);
+  stroke-width: 3.6;
+  stroke-dasharray: none;
+}
+.prose .chart .chart-line--climate {
+  stroke: var(--ink);
+  stroke-width: 1.35;
+  stroke-dasharray: none;
+}
+.prose .chart .chart-line--giss {
+  stroke: var(--accent);
+  stroke-width: 1.7;
+  stroke-dasharray: none;
+}
+.prose .chart .chart-line--airs7 {
+  stroke: var(--ink);
+  stroke-width: 1.45;
+  stroke-dasharray: none;
+}
+.prose .chart .chart-line--airs6 {
+  stroke: var(--ink);
+  stroke-width: 1.3;
+  stroke-dasharray: 4 3;
+}
+.prose figure.chart--temp {
+  width: min(92vw, 52rem);
+  max-width: 92vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+.prose .chart--temp .chart-hero {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 26px;
+  letter-spacing: -0.03em;
+  fill: var(--accent-deep);
+}
+.prose .chart--temp .temp-readout {
+  visibility: hidden;
+  font-variant-numeric: tabular-nums;
+}
+.prose .chart--temp .temp-year:hover .temp-readout {
+  visibility: visible;
+}
+.prose .chart--temp:has(.temp-year:hover) .temp-rest {
+  visibility: hidden;
+}
+.prose .chart--temp .temp-hit {
+  fill: transparent;
+}
+.prose .chart--temp .temp-year:hover .temp-hit {
+  fill: rgba(14, 12, 10, 0.07);
+}
+.prose .chart--temp .temp-smooth {
+  pointer-events: none;
+}
+.prose .chart--temp .chart-baseline {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-opacity: 0.75;
+}
+.prose .chart--temp .temp-missing {
+  fill: none;
+  stroke: var(--ink);
+  stroke-opacity: 0.35;
+  stroke-width: 0.6;
+}
+.prose .chart .chart-line--co2-month {
+  stroke: var(--accent);
+  stroke-width: 1.35;
+}
+.prose .chart .chart-line--co2-trend,
+.prose .chart .chart-line--co2-mean {
+  stroke: var(--ink);
+  stroke-width: 1.65;
+}
+.prose .chart .chart-bar--peak {
+  fill: var(--accent-deep);
+}
+.prose .chart--co2 .chart-hero {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 32px;
+  letter-spacing: -0.03em;
+  fill: var(--accent-deep);
+}
+.prose .chart--co2 .co2-rest,
+.prose .chart--co2 .co2-readout {
+  font-variant-numeric: tabular-nums;
+}
+.prose .chart--co2 .co2-readout {
+  visibility: hidden;
+}
+.prose .chart--co2 .co2-year:hover .co2-readout {
+  visibility: visible;
+}
+.prose .chart--co2:has(.co2-year:hover) .co2-rest {
+  visibility: hidden;
+}
+.prose .chart--co2 .co2-hit {
+  fill: transparent;
+}
+.prose .chart--co2 .co2-year:hover .co2-hit {
+  fill: rgba(14, 12, 10, 0.06);
+}
+.prose .chart--co2 .co2-mean {
+  pointer-events: none;
+}
 
 /* ============ POST NAV (prev / next) ============ */
 .post-nav {
   max-width: var(--measure);
-  margin: 3.5rem auto 0;
-  padding: 1.4rem var(--gutter) 0;
-  border-top: 1px solid var(--ink-faint);
+  margin: 4rem auto 0;
+  padding: 0 var(--gutter);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.4rem;

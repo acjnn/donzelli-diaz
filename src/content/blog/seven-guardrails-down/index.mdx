@@ -2,9 +2,9 @@
 title: "Seven Guardrails Down"
 description: "What a single week in September 2026 reveals about the state of the planet"
 pubDate: 2026-09-22
-cover: ./cover.png
-coverAlt: "A flat rust-red field, standing in for a cover image"
-coverCaption: "fig. 0 — a placeholder cover, in house rust"
+cover: ./cover.webp
+coverAlt: "Three globes from the Copernicus Atmosphere Monitoring Service tracking the Antarctic ozone hole in the second half of 2026. On 1 August the dark blue of very low ozone is a small patch over the pole. By 30 August it has opened into a ring, and by 12 September it is a wide hole around the white continent. The scale runs from 220 Dobson units in blue to 400 in red."
+coverCaption: "fig. 0 — the Antarctic ozone hole, 1 August, 30 August, and 12 September 2026. Dark blue is where the ozone column is thinnest, toward 220 Dobson units. In six weeks a small patch becomes a wide ring. Copernicus Atmosphere Monitoring Service."
 series: signals
 seriesOrder: 1
 tags: ["science", "notes"]
@@ -78,6 +78,34 @@ So the September 2026 Planetary Health Check now counts seven transgressions, al
   </tbody>
 </table>
 
+Biodiversity is the row with a record you can plot. The Living Planet Index follows the average change in monitored wildlife populations, and it sets 1970 to 100%.[^lpi]
+
+<Figure
+  tone="chart"
+  src="/img/living-planet-index-by-region.svg"
+  alt="Line chart of the Living Planet Index by region from 1970 to 2020. Every line starts at 100 percent. Latin America and the Caribbean falls almost to the bottom. Africa and the world decline steeply. Asia and the Pacific declines less. North America and Europe and Central Asia stay higher, and Europe rises above its 1970 level before falling back."
+  caption="fig. 2 — the index from 1970 to 2020, with 1970 set to 100%. It is the average relative change across 34,836 populations of 5,495 vertebrate species, not a count of extinctions. The world line ends near 27%, the 73% average decline in the 2024 report. Latin America and the Caribbean falls furthest, a 95% decline. Africa falls by 76%. Europe and Central Asia, and North America, decline less, partly because much of their loss came before 1970 and this baseline cannot see it."
+  credit="Our World in Data, CC BY"
+/>
+
+Freshwater is the row you can see from orbit this month.
+
+<Figure
+  tone="photo"
+  src="/img/20260921_Motagua%20Drought.webp"
+  alt="Two satellite views of the Motagua valley in Guatemala, stacked. The upper view, 25 September 2025, shows green hills, a braided river, and the towns of San Agustín Acasaguastlán and El Rancho. The lower view, 20 September 2026, shows the same valley browner, with a paler and more exposed riverbed."
+  caption="fig. 3 — the Motagua valley, Guatemala, a year apart. Above, 25 September 2025. Below, 20 September 2026. The hills and the fields around San Agustín Acasaguastlán and El Rancho go from green to brown, and the river corridor shows more bare bed. Copernicus titles the pair as drought."
+  credit="European Union, Copernicus Sentinel-2"
+/>
+
+<Figure
+  tone="photo"
+  src="/img/20260922_Poland%20Zywiec%20water%20levels.webp"
+  alt="Two satellite views of the Żywiec reservoir in southern Poland, side by side. On the left, 20 September 2025, the lake is full and dark between green hills, with the town of Żywiec at the southern end. On the right, 18 September 2026, the water has pulled back, leaving pale exposed banks along the shore and at the southern arm."
+  caption="fig. 4 — the Żywiec reservoir, Poland, a year apart. Left, 20 September 2025, the lake full. Right, 18 September 2026, the water drawn back from the banks, with pale ground where the shoreline was. Copernicus titles the pair as low water levels."
+  credit="European Union, Copernicus Sentinel-2"
+/>
+
 The debate among scientists isn't really about whether these pressures exist. It's about implementation: which control variables best capture each boundary, how to handle regional variation, and whether the framework helps or hurts when it gets into policy rooms. The van Vuuren team, in a 2025 pathways analysis, demonstrated that swapping one metric for another — pH instead of aragonite saturation for ocean acidification, PM2.5 instead of aerosol optical depth for aerosol loading — materially changes the policy implications.[^vanvuuren2025] The framework is powerful but not precise, which is exactly what its creators said from the start.
 
 What the Potsdam team's lead author Boris Sakschewski put bluntly: the risk of large-scale, persistent, and potentially irreversible changes is growing, while the margin for error is shrinking.[^sakschewski] That's not a framing. It's a reading of the data.
@@ -98,13 +126,6 @@ So why, in September 2026, is the ozone hole the size of North America?
 
 Because recovery isn't a straight line. Year-to-year variability is driven by meteorology — specifically, stratospheric temperatures over the South Pole that control the formation of polar stratospheric clouds. Those clouds provide surfaces for the chemical reactions that activate chlorine radicals, which then shred ozone molecules when springtime sunlight returns. An unusually cold stratosphere in early September 2026 triggered rapid cloud formation, and the hole expanded fast.
 
-<Figure
-  src="/img/seven-guardrails-down-ozone.jpg"
-  alt="Three globes from the Copernicus Atmosphere Monitoring Service tracking the Antarctic ozone hole in the second half of 2026. On 1 August the dark blue of very low ozone is a small patch. By 30 August it has spread, and by 12 September it is a wide ring around the continent."
-  caption="fig. 2 — the Antarctic ozone hole, 1 August, 30 August, and 12 September 2026. Dark blue is where the ozone column is thinnest."
-  credit="Copernicus Atmosphere Monitoring Service"
-/>
-
 Copernicus was careful to point out what the area number doesn't tell you. While the hole's extent exceeded the seasonal average by five million square kilometers, the minimum ozone column and the ozone mass deficit both remained near historical norms. In plain English: the hole was wide but not unusually deep.
 
 <BarChart
@@ -112,7 +133,7 @@ Copernicus was careful to point out what the area number doesn't tell you. While
   x="t"
   y="v"
   title="Ozone hole, million km²"
-  caption="fig. 3 — the hole on 12 September, and the seasonal average implied by running five million square kilometers above it."
+  caption="fig. 5 — the hole on 12 September, and the seasonal average implied by running five million square kilometers above it."
 />
 
 <PullQuote by="in plain English">The hole was wide but not unusually deep.</PullQuote>
@@ -133,6 +154,15 @@ This is the story that should be getting more attention than it does.
 
 Every year, land ecosystems and oceans absorb roughly half of humanity's CO₂ emissions. Forests, soils, and seawater act as a giant carbon sponge, slowing the rate at which greenhouse gases accumulate in the atmosphere. If that sponge weakens, the same level of emissions produces faster warming. Simple math, terrifying implications.
 
+The Global Carbon Budget draws that split across zero.[^gcb]
+
+<Figure
+  tone="chart"
+  src="/img/s51_2024_Global_Sources_and_Sinks.svg"
+  alt="Chart of the global carbon budget from 1860 to 2023, in gigatonnes of CO2 a year. Fossil carbon climbs above zero. Land-use change is a thinner positive band. Below zero, light blue is the atmosphere, green is the land sink, and darker blue is the ocean sink. The land line is jagged. A gray region marks where the estimated sources and sinks do not meet."
+  caption="fig. 6 — sources and sinks, 1860 through 2023, in gigatonnes of CO₂ a year. Above zero, the sources: fossil carbon in gray, land-use change in tan. Fossil carbon includes the small cement carbonation sink. Below zero, where the carbon went: the atmosphere in light blue, the land sink in green, the ocean sink in darker blue. Land is the line that jumps. The pale gray under the stack is the imbalance. The chart's own note says estimated sources and estimated sinks do not match, and that the gap is still an open question."
+/>
+
 The most comprehensive recent synthesis, published in Nature in 2024 by Yude Pan and colleagues, found that the global forest carbon sink has remained roughly stable over three decades — but only because gains in some biomes masked devastating losses in others.[^pan2024] Boreal forests lost 36% of their sink capacity. Tropical intact forests lost 31%. And two-thirds of the climate benefit from the remaining forest sink was negated by tropical deforestation, running at 2.2 billion tonnes of carbon per year over 1990–2019.
 
 <BarChart
@@ -140,17 +170,39 @@ The most comprehensive recent synthesis, published in Nature in 2024 by Yude Pan
   x="t"
   y="v"
   title="Forest sink capacity lost, %"
-  caption="fig. 4 — how much of the sink disappeared in boreal forests and in tropical intact forests, even while the global forest sink looked steady."
+  caption="fig. 7 — how much of the sink disappeared in boreal forests and in tropical intact forests, even while the global forest sink looked steady."
 />
 
-Then came 2023, and the numbers went from concerning to alarming. A rapid assessment published in National Science Review found that the global net land sink collapsed to just 0.44 billion tonnes of carbon — the weakest since 2003.[^ke2024] The CO₂ growth rate at Mauna Loa hit 3.37 parts per million, 86% higher than the previous year. The Amazon drought alone drove 0.31 billion tonnes in abnormal losses. Canadian wildfires contributed 0.58 billion tonnes. Land uptake north of 20°N — where boreal and temperate forests do the bulk of their work — had halved since 2015.
+Then came 2023, and the numbers went from concerning to alarming. A rapid assessment published in National Science Review found that the global net land sink collapsed to just 0.44 billion tonnes of carbon — the weakest since 2003.[^ke2024] The CO₂ growth rate at Mauna Loa hit 3.37 parts per million, 86% higher than the previous year.[^ke2024][^mlo] The Amazon drought alone drove 0.31 billion tonnes in abnormal losses. Canadian wildfires contributed 0.58 billion tonnes. Land uptake north of 20°N — where boreal and temperate forests do the bulk of their work — had halved since 2015.
 
 <BarChart
   data={[{ t: "Land sink", v: 0.44 }, { t: "Amazon", v: 0.31 }, { t: "Canada fires", v: 0.58 }]}
   x="t"
   y="v"
   title="2023 carbon, billion tonnes"
-  caption="fig. 5 — three different numbers from that year. The land sink is what the continents still absorbed. The Amazon and Canada figures are abnormal losses inside the year, not additions to the sink."
+  caption="fig. 8 — three different numbers from that year. The land sink is what the continents still absorbed. The Amazon and Canada figures are abnormal losses inside the year, not additions to the sink."
+/>
+
+<Co2Chart
+  caption="fig. 9 — monthly carbon dioxide at Mauna Loa, March 1958 through August 2026, in parts per million. Rust is the monthly mean. At this scale the seasonal rise and fall reads as a band around the line. Ink is the same record with the season removed. The number is the highest month, May 2026, at 432.34. The series begins at 315.71. Below, each bar is the annual increase: the November–February mean minus the same four months a year earlier. The ink line is the mean of the ten years ending that year. The dark bar, marked 2023, is the largest, 3.35 parts per million by this measure. The 3.37 above is the increase reported for that year. 2024 is the bar beside it."
+/>
+
+What the air kept is a different series. The global growth rate is the annual addition to atmospheric CO₂, and it has been climbing since the direct record began, with sharp peaks in El Niño years.
+
+<Figure
+  tone="chart"
+  src="/img/s54_2024_ESSD21_Fig4b.png"
+  alt="Line chart of the atmospheric CO2 growth rate from 1960 to the mid-2020s, in gigatonnes of CO2 a year. The black line rises from around 5 toward 20, with large spikes. A blue uncertainty band is wide in the early decades and narrow later. A red point with an error bar sits at the right edge."
+  caption="fig. 10 — atmospheric CO₂ growth rate, in gigatonnes of CO₂ a year. The black line is the annual increase. The blue band is the one-standard-deviation uncertainty, wide before the observing network thickened and tight afterward. The spikes line up with strong El Niño years. The red point is the budget's projection for 2024, with its own error bar. This is the global growth rate, not the Mauna Loa parts-per-million record in the figure above."
+/>
+
+Under that line, the land term is not a smooth sponge.
+
+<Figure
+  tone="chart"
+  src="/img/s57_2024_ESSD21_Fig07.svg"
+  alt="Two panels of land carbon flux from 1960 into the 2020s, in gigatonnes of CO2 a year. The left panel is the land sink. The right panel is the net land flux after subtracting land-use change. Thin green lines are individual models, a heavier green line is their mean, and a black line with a gray band is the budget estimate. The means rise, the lines swing hard from year to year, and the right-hand end drops."
+  caption="fig. 11 — the land term in the same budget, from 1960. Positive is uptake, in gigatonnes of CO₂ a year, not the billion-tonne carbon figures in the 2023 bars. Panel a is the land sink on its own. Thin green lines are individual vegetation models, the heavier green is their mean, and the black line with the gray band is the budget estimate and its one-standard-deviation uncertainty. Panel b subtracts land-use change, so it is what land does to the atmosphere once deforestation and the rest are counted. The mean rises. The swings are as large as the rise, and the last years drop."
 />
 
 Independent research in Nature Ecology & Evolution confirmed the mechanism: warm extremes weaken carbon uptake primarily by reducing gross primary productivity — photosynthesis, essentially — with tropical regions contributing about 81% of the effect.[^yuan2024] The culprit is increasingly vapor pressure deficit (how thirsty the air is), which matters more than temperature or soil moisture alone. When the air gets that dry, plants close their stomata to conserve water, and carbon absorption drops.
@@ -167,30 +219,27 @@ What the Potsdam team framed sharply: our pathway to net-zero emissions assumes 
 
 The IMBIE study — the most comprehensive satellite analysis of polar ice loss ever conducted — brought a number into focus that's easy to read and hard to process: 11.3 trillion metric tonnes of ice, gone since 1979.
 
-The team, led by Inès Otosaka and Andrew Shepherd at the University of Northumbria, combined 42 independent satellite surveys from 27 missions. One of the most striking findings was about how the ice is disappearing. Eighty-four percent of the combined loss wasn't from surface melting. It was from glaciers accelerating and dumping larger volumes of ice directly into the ocean. The trend is driven by warming ocean water eating into the glaciers from below — a process that's harder to observe and harder to reverse than surface melt.
-
 <Figure
+  tone="photo"
   src="/img/seven-guardrails-down-greenland.jpeg"
   alt="Satellite view of the Greenland coast, where a pale glacier runs into dark open water strewn with broken ice. Brown rock shows along the margins, and the land is labeled Greenland."
-  caption="fig. 6 — Greenland, where the ice meets the ocean."
+  caption="fig. 12 — Greenland, where the ice meets the ocean."
 />
 
-<BarChart
-  data={[{ t: "Discharge", v: 84 }, { t: "Surface", v: 16 }]}
-  x="t"
-  y="v"
-  title="Where the ice went, %"
-  caption="fig. 7 — share of the combined Greenland and Antarctica loss. Most of it was glaciers speeding up and dumping ice into the ocean, not melting on the surface."
+The team, led by Inès Otosaka and Andrew Shepherd at the University of Northumbria, combined 42 independent satellite surveys from 27 missions. One of the most striking findings was about how the ice is disappearing. Eighty-four percent of the combined loss wasn't from surface melting. It was from glaciers accelerating and dumping larger volumes of ice directly into the ocean. The trend is driven by warming ocean water eating into the glaciers from below — a process that's harder to observe and harder to reverse than surface melt.
+
+Antarctica's surface has gained mass over these decades, so discharge there is larger than the net loss. Greenland has lost from the surface and from discharge, with discharge the larger part.
+
+<IceMassChart
+  part="mass"
+  caption="fig. 13 — cumulative mass change from January 1979 through December 2023, counted from the end of 1978. The heavy line is both ice sheets, and the gray tint is the one-sigma uncertainty of that sum. Solid is Greenland, dashed is Antarctica. Below, dashed rust is surface mass balance and solid is ice discharge. Those two lines add up to the number at the right of each panel, and each carries its own uncertainty. Antarctica's surface stays above zero for most of the record. The late rise is snowfall. The right-hand scale turns mass into sea level at 362.5 gigatonnes per millimetre."
 />
 
 The rates tell the acceleration story. Greenland's losses climbed from about 60 billion tonnes per year in the 1980s to 264 billion in the 2010s. Antarctica went from 48 billion to 202 billion over the same period. A temporary slowdown between 2020 and 2023 — driven by heavy snowfall on East Antarctica and milder Greenland summers — offered a brief reprieve, but scientists caution against reading it as a trend change.
 
-<BarChart
-  data={[{ t: "GL 1980s", v: 60 }, { t: "GL 2010s", v: 264 }, { t: "AA 1980s", v: 48 }, { t: "AA 2010s", v: 202 }]}
-  x="t"
-  y="v"
-  title="Ice loss, billion tonnes/yr"
-  caption="fig. 8 — Greenland (GL) and Antarctica (AA). About 60 to 264 billion tonnes a year in Greenland, and 48 to 202 in Antarctica, from the 1980s to the 2010s."
+<IceMassChart
+  part="rate"
+  caption="fig. 14 — yearly mean mass-balance rate, in gigatonnes a year. Solid is Greenland, dashed is Antarctica, and the tint is that year's one-sigma uncertainty. The loss rate deepens through the 2000s and 2010s, then eases after 2020. At the end, Antarctica's band still covers zero."
 />
 
 Total contribution to sea-level rise: about 3.1 centimeters since 1979. That's a number that sounds small until you translate it into people — an additional six to nine million exposed to coastal flooding and erosion.
@@ -210,7 +259,7 @@ By September 20, the Niño 3.4 sea-surface temperature anomaly hit 3.05°C above
   x="t"
   y="v"
   title="Niño 3.4, °C above average"
-  caption="fig. 9 — the 2015–16 peak at 3.02°C, and 3.05°C on 20 September 2026. The axis starts at zero, so the bars look like twins. The record is three hundredths of a degree, and the event has not peaked."
+  caption="fig. 15 — the 2015–16 peak at 3.02°C, and 3.05°C on 20 September 2026. The axis starts at zero, so the bars look like twins. The record is three hundredths of a degree, and the event has not peaked."
 />
 
 El Niño matters far beyond the Pacific. Strong events amplify planetary wave patterns that send energy crashing into the stratosphere, weakening the polar vortex — the band of winds that normally keeps Arctic air bottled up over the pole. Seasonal models from both the European Centre for Medium-Range Weather Forecasts and the UK Met Office are flagging a likely sudden stratospheric warming event around January–February 2027, which would shove Arctic air south over North America and Europe with a typical 10- to 30-day lag.[^ssw] The 2015–16 Super El Niño produced exactly this pattern.
@@ -221,17 +270,24 @@ The compound effect is what matters. A stronger El Niño redistributes heat glob
 
 S&P Global's September report delivered a verdict that many climate scientists had quietly accepted but few institutions had been willing to state flatly: limiting warming to 1.5°C is no longer achievable under any plausible trajectory. Energy demand in emerging economies is projected to grow by over 60% by 2060 — the equivalent of adding another China to the global energy system — outrunning decarbonization even in aggressive scenarios.
 
+The temperature those pathways are being judged against is not a scenario. NASA's land-ocean index has a value for every month since January 1880.[^gistemp] The zero of that index is the 1951–1980 average. That average is already warmer than the nineteenth century, and it is not the preindustrial line the 1.5°C target is counted from.
+
+<TemperatureChart
+  caption="fig. 16 — every month from January 1880 through August 2026, colored by its departure from the 1951–1980 average. Paper is that average. Slate is colder, and rust is warmer, darkening as the anomaly grows. The bars are the annual mean. The ink line is a five-year mean through them. 2024, at +1.29°C, is the warmest year in the series. The lower panel is a different zero: anomalies from 2007–2016, the baseline the AIRS satellite uses. Rust is the surface record, solid ink is AIRS v7, dashed ink is AIRS v6. They share the shape of the last decade. The surface runs the hottest."
+/>
+
 This doesn't make the Paris Agreement irrelevant. Every tenth of a degree still matters for the frequency and severity of extremes, the survival of ecosystems, and the displacement of people. But it does mean the policy conversation needs to shift from "can we stay under 1.5?" (no) to "how do we limit overshoot, and what does adaptation look like at 1.7 or 2.0?"
 
 ## The human cost, written in a Himalayan mountainside
 
-On August 26, a mountainside above Langtang Lirung in Nepal gave way and killed more than 1,300 people. The World Weather Attribution analysis, published three weeks later, found that decades of warming had thinned glaciers and thawed permafrost deep in the rock, progressively destabilizing the slope. A 7.8-magnitude earthquake in 2015 may have weakened it further, but the warming contribution was the long fuse.
-
 <Figure
+  tone="photo"
   src="/img/seven-guardrails-down-mountains.jpeg"
   alt="Two satellite views of the same high mountain valley, stacked. The upper view shows a snow-covered peak and glacier between green slopes. The lower view shows a broad brown scar where that slope has given way."
-  caption="fig. 10 — the mountainside above Langtang Lirung. Above, the slope intact. Below, the scar after it gave way."
+  caption="fig. 17 — the mountainside above Langtang Lirung. Above, the slope intact. Below, the scar after it gave way."
 />
+
+On August 26, a mountainside above Langtang Lirung in Nepal gave way and killed more than 1,300 people. The World Weather Attribution analysis, published three weeks later, found that decades of warming had thinned glaciers and thawed permafrost deep in the rock, progressively destabilizing the slope. A 7.8-magnitude earthquake in 2015 may have weakened it further, but the warming contribution was the long fuse.
 
 Nearly 200 glacial lakes in India alone are now classified as high-risk. Only 21 of the roughly 40,000 glaciers in the Hindu Kush–Himalaya are monitored on the ground. The region is approaching what hydrologists call "peak water" — the point at which glacial melt begins declining not because the situation improves, but because there's less ice left to melt — potentially by mid-century.[^lakes]
 
@@ -255,7 +311,7 @@ September 2026 is telling us that the window for using them is not infinite.
 
 [^ozone]: Copernicus Atmosphere Monitoring Service, "Ozone hole reaches notable threshold early again as area increases above average in 2026," 16 September 2026. [The release](https://atmosphere.copernicus.eu/copernicus-ozone-hole-reaches-notable-threshold-early-again-area-increases-above-average-2026).
 
-[^imbie]: Inès Otosaka, Andrew Shepherd and the IMBIE team, "Mass balance of the Greenland and Antarctic ice sheets from the 1970s to 2023," *Scientific Data*, 2026. [The paper](https://doi.org/10.1038/s41597-026-08088-0). The six-to-nine-million figure is Andrew Shepherd's, in [ESA's account of the release](https://www.esa.int/Applications/Observing_the_Earth/FutureEO/Faster-flowing_glaciers_fuel_decades_of_polar_ice_loss).
+[^imbie]: Inès Otosaka, Andrew Shepherd and the IMBIE team, "Mass balance of the Greenland and Antarctic ice sheets from the 1970s to 2023," *Scientific Data*, 2026. [The paper](https://doi.org/10.1038/s41597-026-08088-0). The curves are the monthly gigatonne series. [UK Polar Data Centre](https://ramadda.data.bas.ac.uk/repository/entry/show?entryid=128c5e33-5224-4197-82f0-19dcc95b80a0), doi:10.5285/128c5e33-5224-4197-82f0-19dcc95b80a0. The six-to-nine-million figure is Andrew Shepherd's, in [ESA's account of the release](https://www.esa.int/Applications/Observing_the_Earth/FutureEO/Faster-flowing_glaciers_fuel_decades_of_polar_ice_loss).
 
 [^nino]: The 3.05°C Niño 3.4 reading, against the 1991–2020 average, and the 3.02°C peak from the 2015–16 event, as reported from NOAA's record. Damian Carrington, "Super El Niño bursts through temperature record months ahead of peak," *The Guardian*, 21 September 2026. [The piece](https://www.theguardian.com/environment/2026/sep/21/super-el-nino-temperature-record).
 
@@ -263,7 +319,13 @@ September 2026 is telling us that the window for using them is not infinite.
 
 [^sp]: S&P Global, *Multidimensional Global Energy Pathways*, 17 September 2026. Limiting warming to 1.5°C is not reachable under any plausible trajectory in the study, and energy demand in emerging markets and developing economies is projected to rise by over 60% by 2060. [The release](https://www.prnewswire.com/news-releases/energy-demand-growth-will-limit-more-ambitious-climate-goals-sp-global-energy-study-finds-302882018.html).
 
+[^gistemp]: NASA Goddard Institute for Space Studies, GISS Surface Temperature Analysis (GISTEMP v4). Land-ocean temperature index anomalies from the 1951–1980 mean, and AIRS v6, AIRS v7, and the surface index on the 2007–2016 mean the satellite uses. [The tables](https://data.giss.nasa.gov/gistemp/data_v4.html).
+
 [^wwa]: World Weather Attribution, "Rapid Warming in the Himalaya Exacerbates Geohazard Cascades Beyond Adaptation Limits," September 2026. The 26 August collapse off Langtang Lirung, the role of glacial thinning and thawed permafrost, and the possible contribution of the 2015 earthquake. [The analysis](https://www.worldweatherattribution.org/rapid-warming-in-the-himalaya-exacerbates-geohazard-cascades-beyond-adaptation-limits/).
+
+[^lpi]: World Wildlife Fund and the Zoological Society of London, *Living Planet Report 2024*. The index is the average relative change in 34,836 populations of 5,495 vertebrate species, with 1970 set to 100%. The world line ends near 27%, a 73% average decline. Latin America and the Caribbean declined 95%, Africa 76%, Asia and the Pacific 60%, North America 39%, and Europe and Central Asia 35%. Loss before 1970 is outside the index. [The index](https://www.livingplanetindex.org/). [The regional chart](https://ourworldindata.org/grapher/living-planet-index-by-region), drawn by Our World in Data under CC BY.
+
+[^gcb]: Pierre Friedlingstein and colleagues, "Global Carbon Budget 2024," *Earth System Science Data* 17, 965–1039 (2025). The sources-and-sinks figure, the atmospheric growth rate, and the land-sink panels. The red point on the growth-rate chart is the budget's projection for 2024. The growth-rate and land-sink panels here are in gigatonnes of CO₂. [The paper](https://doi.org/10.5194/essd-17-965-2025).
 
 [^rockstrom2009]: Johan Rockström and colleagues, "A safe operating space for humanity," *Nature* 461, 472–475 (2009). [The paper](https://doi.org/10.1038/461472a).
 
@@ -290,6 +352,8 @@ September 2026 is telling us that the window for using them is not infinite.
 [^pan2024]: Yude Pan and colleagues, "The enduring world forest carbon sink," *Nature* 631, 563–569 (2024). [The paper](https://doi.org/10.1038/s41586-024-07602-x).
 
 [^ke2024]: Piyu Ke, Philippe Ciais, Stephen Sitch and colleagues, "Low latency carbon budget analysis reveals a large decline of the land carbon sink in 2023," *National Science Review* 11, nwae367 (2024). [The paper](https://doi.org/10.1093/nsr/nwae367).
+
+[^mlo]: NOAA Global Monitoring Laboratory, monthly mean CO₂ at Mauna Loa, March 1958 through August 2026. Values through April 1974 are the Scripps Institution of Oceanography measurements. The annual increase in the figure is the November–February mean minus the same four months a year earlier. [The Mauna Loa record](https://gml.noaa.gov/ccgg/trends/).
 
 [^yuan2024]: Xiuliang Yuan and colleagues, "Weakening of global terrestrial carbon sequestration capacity under increasing intensity of warm extremes," *Nature Ecology & Evolution* (2024). [The paper](https://doi.org/10.1038/s41559-024-02576-5).
 

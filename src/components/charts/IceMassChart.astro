@@ -1,0 +1,115 @@
+---
+import greenlandCsv from "../../dataset/imbie3_greenland_Gt_partitioned.csv?raw";
+import antarcticaCsv from "../../dataset/imbie3_antarctica_Gt_partitioned.csv?raw";
+import { massFigure, rateFigure, type IceFigure } from "../../lib/ice-chart";
+import { iceLedger } from "../../lib/imbie";
+
+interface Props {
+	part: "mass" | "rate";
+	caption: string;
+}
+
+const { part, caption } = Astro.props;
+const ledger = iceLedger(greenlandCsv, antarcticaCsv);
+const figure: IceFigure = part === "rate" ? rateFigure(ledger) : massFigure(ledger);
+const source = "https://ramadda.data.bas.ac.uk/repository/entry/show?entryid=128c5e33-5224-4197-82f0-19dcc95b80a0";
+---
+
+<figure class="chart chart--line" data-chart={part === "rate" ? "ice-rate" : "ice-mass"}>
+	<svg viewBox={`0 0 ${figure.width} ${figure.height}`} role="img" aria-label={figure.label} overflow="hidden">
+		{
+			figure.panels.map((panel) => (
+				<g>
+					<text class="chart-axis" x={panel.title.x} y={panel.title.y}>
+						{panel.title.text}
+					</text>
+					{panel.legend?.map((item) => (
+						<g>
+							<line
+								class={`chart-line chart-line--${item.tone}`}
+								x1={item.x}
+								x2={item.x + 16}
+								y1={item.y - 4}
+								y2={item.y - 4}
+							/>
+							<text class="chart-tick" x={item.x + 20} y={item.y}>
+								{item.text}
+							</text>
+						</g>
+					))}
+					{panel.hero && (
+						<text class="chart-annotation" x={panel.hero.x} y={panel.hero.y} text-anchor="end">
+							{panel.hero.text}
+						</text>
+					)}
+					<defs>
+						<clipPath id={panel.clipId}>
+							<rect x={panel.clip.x} y={panel.clip.y} width={panel.clip.w} height={panel.clip.h} />
+						</clipPath>
+					</defs>
+					{panel.yTicks.map((tick) => (
+						<g>
+							{tick.grid && (
+								<line class="chart-grid" x1={panel.clip.x} x2={panel.clip.x + panel.clip.w} y1={tick.y} y2={tick.y} />
+							)}
+							<text class="chart-tick" x={tick.x} y={tick.y + 3} text-anchor="end">
+								{tick.text}
+							</text>
+							{tick.rightText && (
+								<text class="chart-tick" x={tick.rightX} y={tick.y + 3} text-anchor="start">
+									{tick.rightText}
+								</text>
+							)}
+						</g>
+					))}
+					{panel.spines.map((spine) => (
+						<line
+							class="chart-grid"
+							style="stroke-dasharray:none"
+							x1={spine.x1}
+							y1={spine.y1}
+							x2={spine.x2}
+							y2={spine.y2}
+						/>
+					))}
+					<g clip-path={`url(#${panel.clipId})`}>
+						{panel.bands.map((band) => (
+							<path class:list={["chart-band", band.tone === "ink" && "chart-band--ink"]} d={band.d} />
+						))}
+						{panel.zero && (
+							<line class="chart-zero" x1={panel.zero.x1} x2={panel.zero.x2} y1={panel.zero.y} y2={panel.zero.y} />
+						)}
+						{panel.lines.map((line) => (
+							<path class={`chart-line chart-line--${line.tone}`} d={line.d} />
+						))}
+					</g>
+					{panel.dots.map((dot) => (
+						<circle class:list={["chart-dot", dot.tone === "ink" && "chart-dot--ink"]} cx={dot.cx} cy={dot.cy} r="2.8" />
+					))}
+					{panel.xTicks.map((tick) => (
+						<text class="chart-tick" x={tick.x} y={tick.y} text-anchor="middle">
+							{tick.text}
+						</text>
+					))}
+					{panel.notes.map((note) => (
+						<text
+							class={note.tone === "note" ? "chart-annotation" : "chart-tick"}
+							x={note.x}
+							y={note.y}
+							text-anchor={note.anchor}
+						>
+							{note.text}
+						</text>
+					))}
+				</g>
+			))
+		}
+	</svg>
+	<figcaption class="chart-caption">
+		{caption}
+		<span class="figure-credit">
+			{" — "}
+			<a href={source}>UK Polar Data Centre</a>
+		</span>
+	</figcaption>
+</figure>

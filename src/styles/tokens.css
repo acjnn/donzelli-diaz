@@ -1,16 +1,20 @@
 /* ============ DONZELLI DIAZ - design tokens ============ */
 
 :root {
-  --ink: #0e0c0a;
-  --paper: #e7ebef;
-  --paper-deep: #dbdfe3;
-  --accent: #9a2740;
-  --accent-deep: #6e1c30;
-  --accent-soft: #c98a99;
-  --ink-soft: rgba(14, 12, 10, 0.7);
-  --ink-faint: rgba(14, 12, 10, 0.35);
-  --paper-soft: rgba(231, 235, 239, 0.6);
-  --paper-faint: rgba(231, 235, 239, 0.18);
+  --ink: #0e0a0a;
+  --paper: #d4d8d8;
+  --paper-deep: #c9ccc7;
+  --accent: #9a2727;
+  --accent-deep: #6e1c50;
+  --accent-soft: #c38ac9;
+  /* Cold pole of the temperature scale: a slate, so the rust can be the heat. */
+  --cold: #4f5470;
+  --cold-soft: #b7c4cb;
+  --ink-soft: rgba(14, 13, 10, 0.7);
+  --ink-faint: rgba(14, 14, 10, 0.35);
+  --ink-hair: rgba(14, 14, 10, 0.16);
+  --paper-soft: rgba(212, 216, 216, 0.6);
+  --paper-faint: rgba(212, 216, 216, 0.18);
 
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-body: "EB Garamond", Georgia, serif;

@@ -28,7 +28,7 @@ for (const post of posts) {
 ---
 
 <Base title="Blog" description="Long-form posts on backend systems, LLM pipelines, and the craft of shipping." section="BLOG">
-	<section class="section" style="padding-top: 1.5rem">
+	<section class="section" style="padding-top: clamp(1.5rem, 3vw, 2.6rem)">
 		<SectionHead num="§" title="Blog" />
 
 		<div class="toc-grid">
@@ -112,14 +112,13 @@ for (const post of posts) {
 	.toc-year:first-child .toc-year__label {
 		margin-top: 0;
 	}
+	.toc-year .dispatch-list {
+		margin-top: 0;
+	}
 	.toc-empty {
 		font-family: var(--font-body);
 		font-size: 1.2rem;
 		color: var(--ink-soft);
-	}
-	.toc-side {
-		border-left: 1px dashed var(--ink-faint);
-		padding-left: clamp(1rem, 2vw, 1.6rem);
 	}
 	.toc-side__head {
 		font-family: var(--font-mono);

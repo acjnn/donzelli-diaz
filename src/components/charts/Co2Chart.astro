@@ -1,0 +1,180 @@
+---
+import mloCsv from "../../dataset/gml_co2_mm_mlo.csv?raw";
+import { co2Figure } from "../../lib/co2-chart";
+
+interface Props {
+	caption: string;
+}
+
+const { caption } = Astro.props;
+const figure = co2Figure(mloCsv);
+const source = "https://gml.noaa.gov/ccgg/trends/";
+const { curve, growth } = figure;
+---
+
+<figure class="chart chart--co2" data-chart="mlo">
+	<svg viewBox={`0 0 ${figure.width} ${figure.height}`} role="img" aria-label={figure.label} overflow="hidden">
+		<defs>
+			<clipPath id={curve.clipId}>
+				<rect x={curve.clip.x} y={curve.clip.y} width={curve.clip.w} height={curve.clip.h} />
+			</clipPath>
+			<clipPath id={growth.clipId}>
+				<rect x={growth.clip.x} y={growth.clip.y} width={growth.clip.w} height={growth.clip.h} />
+			</clipPath>
+		</defs>
+
+		<text class="chart-axis" x={curve.title.x} y={curve.title.y}>
+			{curve.title.text}
+		</text>
+		{
+			curve.legend.map((item) => (
+				<g>
+					<line
+						class={`chart-line chart-line--co2-${item.tone}`}
+						x1={item.x}
+						x2={item.x + 18}
+						y1={item.y - 4}
+						y2={item.y - 4}
+					/>
+					<text class="chart-tick" x={item.x + 22} y={item.y}>
+						{item.text}
+					</text>
+				</g>
+			))
+		}
+
+		<text class="chart-tick" x={figure.kicker.x} y={figure.kicker.y}>
+			{figure.kicker.text}
+		</text>
+		<text class="chart-hero" x={figure.hero.x} y={figure.hero.y}>
+			{figure.hero.text}
+		</text>
+		<text class="chart-tick" x={figure.heroRest.x} y={figure.heroRest.y}>
+			{figure.heroRest.text}
+		</text>
+
+		{
+			curve.yTicks.map((tick) => (
+				<g>
+					{tick.grid && (
+						<line class="chart-grid" x1={curve.clip.x} x2={curve.clip.x + curve.clip.w} y1={tick.y} y2={tick.y} />
+					)}
+					<text class="chart-tick" x={tick.x} y={tick.y + 3} text-anchor="end">
+						{tick.text}
+					</text>
+				</g>
+			))
+		}
+		{
+			curve.spines.map((spine) => (
+				<line class="chart-grid" style="stroke-dasharray:none" x1={spine.x1} y1={spine.y1} x2={spine.x2} y2={spine.y2} />
+			))
+		}
+		<g clip-path={`url(#${curve.clipId})`}>
+			<path class="chart-line chart-line--co2-month" d={curve.month} />
+			<path class="chart-line chart-line--halo" d={curve.trend} />
+			<path class="chart-line chart-line--co2-trend" d={curve.trend} />
+		</g>
+		<circle class="chart-dot" cx={figure.peakDot.cx} cy={figure.peakDot.cy} r="2.8" />
+		{
+			curve.xTicks.map((tick) => (
+				<text class="chart-tick" x={tick.x} y={tick.y} text-anchor={tick.anchor}>
+					{tick.text}
+				</text>
+			))
+		}
+
+		<text class="chart-axis" x={growth.title.x} y={growth.title.y}>
+			{growth.title.text}
+		</text>
+		{
+			growth.legend.map((item) => (
+				<g>
+					<line
+						class={`chart-line chart-line--co2-${item.tone}`}
+						x1={item.x}
+						x2={item.x + 18}
+						y1={item.y - 4}
+						y2={item.y - 4}
+					/>
+					<text class="chart-tick" x={item.x + 22} y={item.y}>
+						{item.text}
+					</text>
+				</g>
+			))
+		}
+		<text class="chart-tick co2-rest" x={growth.rest.x} y={growth.rest.y} text-anchor={growth.rest.anchor}>
+			{growth.rest.text}
+		</text>
+
+		{
+			growth.yTicks.map((tick) => (
+				<g>
+					{tick.grid && (
+						<line
+							class="chart-grid"
+							x1={growth.clip.x}
+							x2={growth.clip.x + growth.clip.w}
+							y1={tick.y}
+							y2={tick.y}
+						/>
+					)}
+					<text class="chart-tick" x={tick.x} y={tick.y + 3} text-anchor="end">
+						{tick.text}
+					</text>
+				</g>
+			))
+		}
+		{
+			growth.spines.map((spine) => (
+				<line class="chart-grid" style="stroke-dasharray:none" x1={spine.x1} y1={spine.y1} x2={spine.x2} y2={spine.y2} />
+			))
+		}
+		<g clip-path={`url(#${growth.clipId})`} class="co2-mean">
+			<line class="chart-zero" x1={growth.zero.x1} x2={growth.zero.x2} y1={growth.zero.y} y2={growth.zero.y} />
+			<path class="chart-line chart-line--co2-mean" d={growth.mean} />
+		</g>
+		{
+			growth.bars.map((bar) => (
+				<g class="co2-year">
+					<title>{bar.title}</title>
+					<rect
+						class:list={["chart-bar", bar.peak && "chart-bar--peak"]}
+						x={bar.x}
+						y={bar.y}
+						width={bar.w}
+						height={bar.h}
+						shape-rendering="crispEdges"
+					/>
+					<text class="chart-tick co2-readout" x={growth.rest.x} y={growth.rest.y} text-anchor="end">
+						{bar.readout}
+					</text>
+					<rect class="co2-hit" x={bar.hit.x} y={bar.hit.y} width={bar.hit.w} height={bar.hit.h} />
+				</g>
+			))
+		}
+		<text
+			class="chart-annotation"
+			x={growth.note.x}
+			y={growth.note.y}
+			text-anchor={growth.note.anchor}
+			pointer-events="none"
+		>
+			{growth.note.text}
+		</text>
+		{
+			growth.xTicks.map((tick) => (
+				<text class="chart-tick" x={tick.x} y={tick.y} text-anchor={tick.anchor}>
+					{tick.text}
+				</text>
+			))
+		}
+	</svg>
+	<figcaption class="chart-caption">
+		{caption}
+		<span class="figure-credit">
+			{" — "}
+			<a href={source}>NOAA Global Monitoring Laboratory</a>
+		</span>
+	</figcaption>
+</figure>

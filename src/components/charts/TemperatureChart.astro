@@ -1,0 +1,240 @@
+---
+import lotiCsv from "../../dataset/GLB.Ts+dSST_landocean.csv?raw";
+import airsCsv from "../../dataset/GLB.Ts+dSST_airs.csv?raw";
+import { temperatureFigure } from "../../lib/temp-chart";
+
+interface Props {
+	caption: string;
+}
+
+const { caption } = Astro.props;
+const figure = temperatureFigure(lotiCsv, airsCsv);
+const readout = figure.rest;
+---
+
+<figure class="chart chart--temp" data-chart="gistemp">
+	<svg viewBox={`0 0 ${figure.width} ${figure.height}`} role="img" aria-label={figure.label} overflow="hidden">
+		<defs>
+			<clipPath id="temp-annual">
+				<rect x={figure.annual.x} y={figure.annual.y} width={figure.annual.w} height={figure.annual.h} />
+			</clipPath>
+			<clipPath id="temp-sat">
+				<rect x={figure.satellite.x} y={figure.satellite.y} width={figure.satellite.w} height={figure.satellite.h} />
+			</clipPath>
+			<pattern id="temp-missing" width="3.2" height="3.2" patternUnits="userSpaceOnUse">
+				<path class="temp-missing" d="M-1,1 l2,-2 M0,3.2 l3.2,-3.2 M2.2,4.2 l2,-2" />
+			</pattern>
+		</defs>
+
+		<text class="chart-axis" x={figure.kicker.x} y={figure.kicker.y}>
+			{figure.kicker.text}
+		</text>
+		<text class="chart-hero" x={figure.hero.x} y={figure.hero.y} text-anchor="end">
+			{figure.hero.text}
+		</text>
+		<text class="chart-tick" x={figure.dek.x} y={figure.dek.y}>
+			{figure.dek.text}
+		</text>
+		<text class="chart-tick temp-rest" x={readout.x} y={readout.y} text-anchor="end">
+			{readout.text}
+		</text>
+
+		<g shape-rendering="crispEdges">
+			{
+				figure.ramp.cells.map((cell) => (
+					<rect x={cell.x} y={figure.ramp.y} width={cell.w} height={figure.ramp.h} fill={cell.fill} />
+				))
+			}
+		</g>
+		<rect
+			class="chart-frame"
+			x={figure.ramp.frame.x}
+			y={figure.ramp.frame.y}
+			width={figure.ramp.frame.w}
+			height={figure.ramp.frame.h}
+		/>
+		{
+			figure.rampTicks.map((tick) => (
+				<text class="chart-tick" x={tick.x} y={tick.y} text-anchor="middle">
+					{tick.text}
+				</text>
+			))
+		}
+
+		{
+			figure.months.map((month) => (
+				<text class="chart-tick" x={month.x} y={month.y} text-anchor="end" dominant-baseline="central">
+					{month.text}
+				</text>
+			))
+		}
+
+		{
+			figure.columns.map((column) => (
+				<g class="temp-year">
+					<title>{column.title}</title>
+					<g shape-rendering="crispEdges">
+						{column.cells.map((cell) => (
+							<rect
+								x={cell.x}
+								y={cell.y}
+								width={cell.w}
+								height={cell.h}
+								fill={cell.fill ?? "url(#temp-missing)"}
+							/>
+						))}
+						{column.bar && (
+							<rect
+								clip-path="url(#temp-annual)"
+								x={column.bar.x}
+								y={column.bar.y}
+								width={column.bar.w}
+								height={column.bar.h}
+								fill={column.bar.fill}
+							/>
+						)}
+					</g>
+					<text class="chart-tick temp-readout" x={readout.x} y={readout.y} text-anchor="end">
+						{column.readout}
+					</text>
+					<rect class="temp-hit" x={column.hit.x} y={column.hit.y} width={column.hit.w} height={column.hit.h} />
+				</g>
+			))
+		}
+		<rect class="chart-frame" x={figure.quilt.x} y={figure.quilt.y} width={figure.quilt.w} height={figure.quilt.h} />
+
+		{
+			figure.yearTicks.map((tick) => (
+				<text class="chart-tick" x={tick.x} y={tick.y} text-anchor="middle">
+					{tick.text}
+				</text>
+			))
+		}
+		<polyline
+			class="chart-baseline"
+			points={`${figure.baseline.x1},${figure.baseline.y - 5} ${figure.baseline.x1},${figure.baseline.y} ${figure.baseline.x2},${figure.baseline.y} ${figure.baseline.x2},${figure.baseline.y - 5}`}
+		/>
+		<text class="chart-annotation" x={figure.baseline.label.x} y={figure.baseline.label.y} text-anchor="middle">
+			{figure.baseline.label.text}
+		</text>
+
+		<text class="chart-axis" x={figure.annualTitle.x} y={figure.annualTitle.y}>
+			{figure.annualTitle.text}
+		</text>
+		<line
+			class="chart-line chart-line--climate"
+			x1={figure.annualLegend.x - 28}
+			x2={figure.annualLegend.x - 8}
+			y1={figure.annualLegend.y - 4}
+			y2={figure.annualLegend.y - 4}
+		/>
+		<text class="chart-tick" x={figure.annualLegend.x} y={figure.annualLegend.y}>
+			{figure.annualLegend.text}
+		</text>
+
+		{
+			figure.annualTicks.map((tick) => (
+				<text class="chart-tick" x={tick.x} y={tick.y + 3} text-anchor="end">
+					{tick.text}
+				</text>
+			))
+		}
+		<line class="chart-frame" x1={figure.annual.x} y1={figure.annual.y} x2={figure.annual.x} y2={figure.annual.y + figure.annual.h} />
+		<line
+			class="chart-frame"
+			x1={figure.annual.x}
+			y1={figure.annual.y + figure.annual.h}
+			x2={figure.annual.x + figure.annual.w}
+			y2={figure.annual.y + figure.annual.h}
+		/>
+		{
+			figure.annualZero && (
+				<line
+					class="chart-zero"
+					x1={figure.annualZero.x1}
+					x2={figure.annualZero.x2}
+					y1={figure.annualZero.y}
+					y2={figure.annualZero.y}
+				/>
+			)
+		}
+		<g clip-path="url(#temp-annual)" class="temp-smooth">
+			<path class="chart-line chart-line--halo" d={figure.smooth} />
+			<path class="chart-line chart-line--climate" d={figure.smooth} />
+		</g>
+
+		<text class="chart-axis" x={figure.satelliteTitle.x} y={figure.satelliteTitle.y}>
+			{figure.satelliteTitle.text}
+		</text>
+		{
+			figure.satelliteLegend.map((item) => (
+				<g>
+					<line
+						class={`chart-line chart-line--${item.tone}`}
+						x1={item.x}
+						x2={item.x + 16}
+						y1={item.y - 4}
+						y2={item.y - 4}
+					/>
+					<text class="chart-tick" x={item.x + 20} y={item.y}>
+						{item.text}
+					</text>
+				</g>
+			))
+		}
+		<text class="chart-tick" x={figure.satelliteDek.x} y={figure.satelliteDek.y}>
+			{figure.satelliteDek.text}
+		</text>
+
+		{
+			figure.satelliteTicks.map((tick) => (
+				<text class="chart-tick" x={tick.x} y={tick.y + 3} text-anchor="end">
+					{tick.text}
+				</text>
+			))
+		}
+		<line
+			class="chart-frame"
+			x1={figure.satellite.x}
+			y1={figure.satellite.y}
+			x2={figure.satellite.x}
+			y2={figure.satellite.y + figure.satellite.h}
+		/>
+		<line
+			class="chart-frame"
+			x1={figure.satellite.x}
+			y1={figure.satellite.y + figure.satellite.h}
+			x2={figure.satellite.x + figure.satellite.w}
+			y2={figure.satellite.y + figure.satellite.h}
+		/>
+		{
+			figure.satelliteZero && (
+				<line
+					class="chart-zero"
+					x1={figure.satelliteZero.x1}
+					x2={figure.satelliteZero.x2}
+					y1={figure.satelliteZero.y}
+					y2={figure.satelliteZero.y}
+				/>
+			)
+		}
+		<g clip-path="url(#temp-sat)">
+			{figure.lines.map((line) => (
+				<path class={`chart-line chart-line--${line.tone}`} d={line.d} />
+			))}
+		</g>
+		{
+			figure.dots.map((dot) => (
+				<circle class:list={["chart-dot", dot.tone !== "giss" && "chart-dot--ink"]} cx={dot.cx} cy={dot.cy} r="2.6" />
+			))
+		}
+		{
+			figure.satelliteXTicks.map((tick) => (
+				<text class="chart-tick" x={tick.x} y={tick.y} text-anchor="middle">
+					{tick.text}
+				</text>
+			))
+		}
+	</svg>
+	<figcaption class="chart-caption">{caption}</figcaption>
+</figure>
