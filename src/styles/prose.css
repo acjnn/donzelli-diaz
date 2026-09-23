@@ -21,10 +21,6 @@
   text-transform: none;
   color: var(--ink-soft);
 }
-.post-kicker .post-no {
-  color: var(--ink);
-  font-weight: 600;
-}
 .post-kicker a {
   color: inherit;
   text-decoration: none;
