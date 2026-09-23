@@ -18,8 +18,13 @@ function resolveRoute(url, fromFile) {
 	if (!url || url.startsWith("data:") || url.startsWith("mailto:") || url.startsWith("tel:")) return true;
 	if (/^https?:\/\//.test(url)) return true; // external links are not checked offline
 	if (url.startsWith("#")) return true;
-	const clean = url.split("#")[0].split("?")[0];
+	let clean = url.split("#")[0].split("?")[0];
 	if (!clean) return true;
+	try {
+		clean = decodeURIComponent(clean);
+	} catch {
+		return false;
+	}
 	let target;
 	if (clean.startsWith("/")) {
 		target = join(DIST, clean);

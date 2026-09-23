@@ -6,7 +6,7 @@ interface Props {
 const { label = "marginalia" } = Astro.props;
 ---
 
-<aside class="aside">
+<aside class="aside" aria-label={label}>
 	<span class="aside-label">{label}</span>
 	<slot />
 </aside>
