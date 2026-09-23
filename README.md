@@ -39,4 +39,4 @@ Series are declared in `src/content/series/<id>.yaml`.
 | `npm test`         | Unit tests (Vitest)                           |
 | `npm run test:e2e` | Browser tests (Playwright)                    |
 | `npm run check`    | Type-check                                    |
-| `npm run deploy`   | Build and deploy to Cloudflare                |
+| `npm run deploy`   | Upload `./dist` to Cloudflare (run the build first) |

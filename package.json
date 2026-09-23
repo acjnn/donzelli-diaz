@@ -38,6 +38,6 @@
     "test:html": "html-validate \"dist/**/*.html\"",
     "test:links": "node scripts/check-links.mjs",
     "test:deploy": "wrangler deploy --dry-run",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "wrangler deploy"
   }
 }

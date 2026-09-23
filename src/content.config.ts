@@ -1,10 +1,17 @@
 import { glob } from "astro/loaders";
 import { defineCollection, reference, z } from "astro:content";
 
+// Fixture posts live in `_*/` folders. Leave them out of production builds so
+// their modules and images are not bundled. `INCLUDE_DRAFTS=1` loads them.
+const includeDrafts = process.env.INCLUDE_DRAFTS === "1";
+
 const blog = defineCollection({
 	// Load Markdown and MDX files in the `src/content/blog/` directory.
 	// Post folders co-locate images: src/content/blog/<slug>/index.mdx + assets.
-	loader: glob({ base: "./src/content/blog", pattern: "**/*.{md,mdx}" }),
+	loader: glob({
+		base: "./src/content/blog",
+		pattern: includeDrafts ? "**/*.{md,mdx}" : ["**/*.{md,mdx}", "!_*/**"],
+	}),
 	schema: ({ image }) =>
 		z
 			.object({

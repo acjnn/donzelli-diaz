@@ -22,4 +22,22 @@ export default defineConfig({
       theme: "css-variables",
     },
   },
+  vite: {
+    build: {
+      rolldownOptions: {
+        onLog(level, log, defaultHandler) {
+          // Astro marks propagated MDX modules with this directive. Rolldown
+          // does not understand it, and head propagation keys off the module
+          // id instead, so the warning is noise.
+          if (
+            log.code === "MODULE_LEVEL_DIRECTIVE" &&
+            String(log.message ?? "").includes("astro:head-inject")
+          ) {
+            return;
+          }
+          defaultHandler(level, log);
+        },
+      },
+    },
+  },
 });
