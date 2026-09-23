@@ -7,7 +7,7 @@ import Marginalia from "../components/Marginalia.astro";
 import SectionHead from "../components/SectionHead.astro";
 import Stamp from "../components/Stamp.astro";
 import FormattedDate from "../components/FormattedDate.astro";
-import { getPosts, readingTime, roman } from "../lib/posts";
+import { getPosts, readingTime } from "../lib/posts";
 import { EMAIL, GITHUB_URL, LINKEDIN_URL, SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
 const headlineDelay = (index: number) => `animation-delay: ${0.08 * index + 0.1}s`;
@@ -71,17 +71,16 @@ const latest = posts.slice(0, 3);
 			<InkRule />
 			<div class="hero-foot-row">
 				<span class="cap">Continue&nbsp;reading&nbsp;↓</span>
-				<span class="cap">I.&nbsp;What&rsquo;s&nbsp;Here&nbsp;·&nbsp;II.&nbsp;Latest&nbsp;Posts&nbsp;·&nbsp;III.&nbsp;Contact</span>
+				<span class="cap">What&rsquo;s&nbsp;Here&nbsp;·&nbsp;Latest&nbsp;Posts&nbsp;·&nbsp;Contact</span>
 			</div>
 		</div>
 	</section>
 
 	<section class="section" data-screen-label="02 Doors">
-		<SectionHead num="I." title="What’s Here" />
+		<SectionHead title="What’s Here" />
 		<div class="doors">
 			<a class="door" href="/blog">
 				<InkFrame>
-					<span class="door__num">i.</span>
 					<h2 class="door__title">Blog</h2>
 					<p class="door__deck">
 						Long-form posts on backend systems, LLM pipelines, and the craft of shipping.
@@ -91,7 +90,6 @@ const latest = posts.slice(0, 3);
 			</a>
 			<a class="door" href="/about">
 				<InkFrame>
-					<span class="door__num">ii.</span>
 					<h2 class="door__title">About</h2>
 					<p class="door__deck">
 						Who I am, the stack I use, and where I&rsquo;ve worked.
@@ -105,14 +103,13 @@ const latest = posts.slice(0, 3);
 	{
 		latest.length > 0 && (
 			<section class="section" data-screen-label="03 Dispatches">
-				<SectionHead num="II." title="Latest Posts" />
-				<ol class="dispatch-list">
-					{latest.map((post, i) => {
+				<SectionHead title="Latest Posts" />
+				<ul class="dispatch-list">
+					{latest.map((post) => {
 						const rt = readingTime(post);
 						return (
 							<li class="dispatch">
 								<a href={`/blog/${post.id}/`}>
-									<span class="dispatch__num">{roman(i + 1)}.</span>
 									<span class="dispatch__date">
 										<FormattedDate date={post.data.pubDate} />
 									</span>
@@ -125,13 +122,13 @@ const latest = posts.slice(0, 3);
 							</li>
 						);
 					})}
-				</ol>
+				</ul>
 			</section>
 		)
 	}
 
 	<section class="section" data-screen-label="04 Contact">
-		<SectionHead num="III." title="Contact" />
+		<SectionHead title="Contact" />
 		<div class="contact-grid">
 			<div class="contact-pitch">
 				<p class="contact-line">

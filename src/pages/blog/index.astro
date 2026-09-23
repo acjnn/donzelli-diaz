@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import SectionHead from "../../components/SectionHead.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
-import { getPosts, readingTime, roman } from "../../lib/posts";
+import { getPosts, readingTime } from "../../lib/posts";
 
 const posts = await getPosts();
 const publishedSeriesIds = new Set(
@@ -18,13 +18,6 @@ for (const post of posts) {
 	byYear.get(year)!.push(post);
 }
 const years = [...byYear.keys()].sort((a, b) => b - a);
-
-let counter = 0;
-const numbers = new Map<string, number>();
-for (const post of posts) {
-	counter += 1;
-	numbers.set(post.id, counter);
-}
 ---
 
 <Base title="Blog" description="Long-form posts on backend systems, LLM pipelines, and the craft of shipping." section="BLOG">
@@ -44,13 +37,12 @@ for (const post of posts) {
 					years.map((year) => (
 						<div class="toc-year">
 							<h2 class="toc-year__label">{year}</h2>
-							<ol class="dispatch-list">
+							<ul class="dispatch-list">
 								{byYear.get(year)!.map((post) => {
 									const rt = readingTime(post);
 									return (
 										<li class="dispatch">
 											<a href={`/blog/${post.id}/`}>
-												<span class="dispatch__num">{roman(numbers.get(post.id)!)}.</span>
 												<span class="dispatch__date">
 													<FormattedDate date={post.data.pubDate} />
 												</span>
@@ -63,7 +55,7 @@ for (const post of posts) {
 										</li>
 									);
 								})}
-							</ol>
+							</ul>
 						</div>
 					))
 				}

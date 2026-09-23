@@ -834,14 +834,6 @@
 .door:hover {
   transform: translateY(-3px) rotate(-0.3deg);
 }
-.door__num {
-  font-family: var(--font-display);
-  font-style: normal;
-  font-weight: 600;
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
-  color: var(--ink);
-  line-height: 1;
-}
 .door__title {
   font-family: var(--font-display);
   font-weight: 700;
@@ -886,18 +878,11 @@
 }
 .dispatch a {
   display: grid;
-  grid-template-columns: 3.2rem 7.5rem minmax(0, 1fr) auto;
+  grid-template-columns: 7.5rem minmax(0, 1fr) auto;
   gap: clamp(0.8rem, 2vw, 1.6rem);
   align-items: baseline;
   padding: 1.1rem 0;
   text-decoration: none;
-  color: var(--ink);
-}
-.dispatch__num {
-  font-family: var(--font-display);
-  font-style: normal;
-  font-weight: 600;
-  font-size: 1.5rem;
   color: var(--ink);
 }
 .dispatch__date {
@@ -1056,7 +1041,7 @@
     grid-template-columns: 1fr;
   }
   .dispatch a {
-    grid-template-columns: 2.4rem minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
   }
   .dispatch__date,
   .dispatch__time {

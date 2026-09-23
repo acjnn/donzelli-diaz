@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import Base from "../../../layouts/Base.astro";
 import SectionHead from "../../../components/SectionHead.astro";
 import FormattedDate from "../../../components/FormattedDate.astro";
-import { getPosts, readingTime, roman, seriesPosts } from "../../../lib/posts";
+import { getPosts, readingTime, seriesPosts } from "../../../lib/posts";
 
 export async function getStaticPaths() {
 	const allSeries = await getCollection("series");
@@ -34,13 +34,12 @@ const { series, parts } = Astro.props;
 					<em>No posts in this series yet.</em>
 				</p>
 			) : (
-				<ol class="dispatch-list">
-					{parts.map((post, i) => {
+				<ul class="dispatch-list">
+					{parts.map((post) => {
 						const rt = readingTime(post);
 						return (
 							<li class="dispatch">
 								<a href={`/blog/${post.id}/`}>
-									<span class="dispatch__num">{roman(i + 1)}.</span>
 									<span class="dispatch__date">
 										<FormattedDate date={post.data.pubDate} />
 									</span>
@@ -53,7 +52,7 @@ const { series, parts } = Astro.props;
 							</li>
 						);
 					})}
-				</ol>
+				</ul>
 			)
 		}
 	</section>
