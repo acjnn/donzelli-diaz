@@ -77,15 +77,11 @@ const latest = posts.slice(0, 3);
 				<div class="vert-label">Est.&nbsp;2019&nbsp;—&nbsp;currently&nbsp;at&nbsp;Epiphany&nbsp;(remote)</div>
 				<InkFrame class="hero-card">
 					<div class="hero-card__inner">
-						<div class="cap">From&nbsp;the&nbsp;editor</div>
+						<div class="cap">Hello</div>
 						<p class="lede">
-							A working dossier of <em>Lorenzo Donzelli</em>, six years between Italian banking floors and a
-							Copenhagen-based AI company. Compiled here: the journal, the stack, the ledger.
+							I&rsquo;m <em>Lorenzo Donzelli</em>. I&rsquo;ve been building software for six years, first in
+							Italian finance, now at a Copenhagen-based AI company. Here you&rsquo;ll find my blog and my CV.
 						</p>
-						<div class="folio">
-							<span>Folio</span>
-							<span class="folio-num">001</span>
-						</div>
 					</div>
 				</InkFrame>
 				<Stamp />
@@ -96,32 +92,32 @@ const latest = posts.slice(0, 3);
 			<InkRule />
 			<div class="hero-foot-row">
 				<span class="cap">Continue&nbsp;reading&nbsp;↓</span>
-				<span class="cap">I.&nbsp;The&nbsp;Doors&nbsp;·&nbsp;II.&nbsp;Latest&nbsp;Dispatches&nbsp;·&nbsp;III.&nbsp;Correspondence</span>
+				<span class="cap">I.&nbsp;What&rsquo;s&nbsp;Here&nbsp;·&nbsp;II.&nbsp;Latest&nbsp;Posts&nbsp;·&nbsp;III.&nbsp;Contact</span>
 			</div>
 		</div>
 	</section>
 
 	<section class="section" data-screen-label="02 Doors">
-		<SectionHead num="I." title="The Doors" sub="two ways in" />
+		<SectionHead num="I." title="What’s Here" />
 		<div class="doors">
 			<a class="door" href="/blog">
 				<InkFrame>
 					<span class="door__num">i.</span>
-					<h2 class="door__title">The Journal</h2>
+					<h2 class="door__title">Blog</h2>
 					<p class="door__deck">
-						Long-form dispatches on backend systems, LLM pipelines, and the craft of shipping.
+						Long-form posts on backend systems, LLM pipelines, and the craft of shipping.
 					</p>
-					<span class="door__cta">Read the journal →</span>
+					<span class="door__cta">Read the blog →</span>
 				</InkFrame>
 			</a>
 			<a class="door" href="/about">
 				<InkFrame>
 					<span class="door__num">ii.</span>
-					<h2 class="door__title">The Author</h2>
+					<h2 class="door__title">About</h2>
 					<p class="door__deck">
-						Identity, stack, and the ledger of roles — the curriculum vitae, in editorial form.
+						Who I am, the stack I use, and where I&rsquo;ve worked.
 					</p>
-					<span class="door__cta">About the author →</span>
+					<span class="door__cta">About me →</span>
 				</InkFrame>
 			</a>
 		</div>
@@ -130,7 +126,7 @@ const latest = posts.slice(0, 3);
 	{
 		latest.length > 0 && (
 			<section class="section" data-screen-label="03 Dispatches">
-				<SectionHead num="II." title="Latest Dispatches" sub="fresh off the press" />
+				<SectionHead num="II." title="Latest Posts" />
 				<ol class="dispatch-list">
 					{latest.map((post, i) => {
 						const rt = readingTime(post);
@@ -156,7 +152,7 @@ const latest = posts.slice(0, 3);
 	}
 
 	<section class="section" data-screen-label="04 Contact">
-		<SectionHead num="III." title="Correspondence" sub="the door is open" />
+		<SectionHead num="III." title="Contact" />
 		<div class="contact-grid">
 			<div class="contact-pitch">
 				<p class="contact-line">
