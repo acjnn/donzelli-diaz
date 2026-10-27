@@ -1,0 +1,124 @@
+---
+import { linear, type StackChartSpec } from "../../lib/svg-chart";
+
+interface Props extends StackChartSpec {
+	caption?: string;
+}
+
+const { label, title, series, panels, yMin, yMax, yTicks, totalLabel, labelBars = [], caption, height = 330 } = Astro.props;
+
+const W = 640;
+const top = 58;
+const left = 46;
+const right = W - 12;
+const bottom = height - 28;
+const gap = 26;
+const panelW = (right - left - gap * (panels.length - 1)) / panels.length;
+const y = linear(yMin, yMax, bottom, top);
+
+const legend: { x: number; text: string; tone?: string; total?: boolean }[] = [];
+let cursor = left;
+for (const s of series) {
+	legend.push({ x: cursor, text: s.label, tone: s.tone });
+	cursor += 18 + s.label.length * 7.5 + 20;
+}
+if (totalLabel) legend.push({ x: cursor, text: totalLabel, total: true });
+
+interface Seg {
+	key: string;
+	tone: string;
+	y0: number;
+	y1: number;
+}
+
+const drawn = panels.map((panel, pi) => {
+	const px = left + pi * (panelW + gap);
+	const band = panelW / panel.bars.length;
+	const barW = Math.min(band * 0.64, 40);
+	return {
+		title: panel.title,
+		px,
+		bars: panel.bars.map((bar, bi) => {
+			const cx = px + band * bi + band / 2;
+			let up = 0;
+			let down = 0;
+			const segs: Seg[] = [];
+			for (const s of series) {
+				const v = bar.values[s.key] ?? 0;
+				if (v === 0) continue;
+				if (v > 0) {
+					segs.push({ key: s.key, tone: s.tone, y0: y(up), y1: y(up + v) });
+					up += v;
+				} else {
+					segs.push({ key: s.key, tone: s.tone, y0: y(down), y1: y(down + v) });
+					down += v;
+				}
+			}
+			const note = labelBars.find((l) => l.panel === pi && l.bar === bar.label);
+			return { bar, cx, barW, segs, top: y(up), note };
+		}),
+	};
+});
+---
+
+<figure class="chart chart--stack">
+	<svg viewBox={`0 0 ${W} ${height}`} role="img" aria-label={label}>
+		<text class="chart-axis" x={left} y={14}>{title}</text>
+		<g class="sx-legend">
+			{
+				legend.map((l) => (
+					<g transform={`translate(${l.x} 34)`}>
+						{l.total ? (
+							<line class="st-total" x1="0" x2="16" y1="-4" y2="-4" />
+						) : (
+							<rect class:list={["st-swatch", `tone-${l.tone}`]} x="0" y="-10" width="12" height="12" rx="2" />
+						)}
+						<text class="chart-tick" x={l.total ? 22 : 18} y="0">{l.text}</text>
+					</g>
+				))
+			}
+		</g>
+		{
+			yTicks.map((t) => (
+				<g>
+					<line class="sx-grid" x1={left} x2={right} y1={y(t.v)} y2={y(t.v)} />
+					<text class="chart-tick" x={left - 8} y={y(t.v) + 3} text-anchor="end">{t.label}</text>
+				</g>
+			))
+		}
+		{
+			drawn.map((p) => (
+				<g>
+					{panels.length > 1 && <text class="st-panel" x={p.px} y={top - 4}>{p.title}</text>}
+					<line class="sx-axis" x1={p.px} x2={p.px + panelW} y1={y(0)} y2={y(0)} />
+					{p.bars.map((b) => (
+						<g class="st-bar">
+							{b.segs.map((s) => (
+								<rect
+									class:list={["st-seg", `tone-${s.tone}`]}
+									x={b.cx - b.barW / 2}
+									y={Math.min(s.y0, s.y1)}
+									width={b.barW}
+									height={Math.max(Math.abs(s.y1 - s.y0), 0.6)}
+									rx="1.5"
+								/>
+							))}
+							{b.bar.total !== undefined && (
+								<line class="st-total" x1={b.cx - b.barW / 2 - 4} x2={b.cx + b.barW / 2 + 4} y1={y(b.bar.total)} y2={y(b.bar.total)} />
+							)}
+							{b.note && (
+								<text class="st-note" x={b.cx} y={Math.min(b.top, b.bar.total !== undefined ? y(b.bar.total) : b.top) - 6} text-anchor="middle">
+									{b.note.text}
+								</text>
+							)}
+							<text class="chart-tick" x={b.cx} y={bottom + 16} text-anchor="middle">{b.bar.label}</text>
+							<rect class="st-hit" x={b.cx - b.barW / 2 - 4} y={top} width={b.barW + 8} height={bottom - top} />
+							<title>{b.bar.tip}</title>
+						</g>
+					))}
+				</g>
+			))
+		}
+	</svg>
+	{caption && <figcaption class="chart-caption">{caption}</figcaption>}
+</figure>

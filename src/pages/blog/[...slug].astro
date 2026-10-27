@@ -16,6 +16,11 @@ import TemperatureChart from "../../components/charts/TemperatureChart.astro";
 import Co2Chart from "../../components/charts/Co2Chart.astro";
 import ScatterChart from "../../components/charts/ScatterChart.astro";
 import InteractiveChart from "../../components/charts/InteractiveChart.tsx";
+import SeriesChart from "../../components/charts/SeriesChart.astro";
+import StackChart from "../../components/charts/StackChart.astro";
+import HBarChart from "../../components/charts/HBarChart.astro";
+import HeatmapChart from "../../components/charts/HeatmapChart.astro";
+import MapChart from "../../components/charts/MapChart.astro";
 
 export async function getStaticPaths() {
 	const posts = await getPosts();
@@ -48,6 +53,11 @@ const components = {
 	Co2Chart,
 	ScatterChart,
 	InteractiveChart,
+	SeriesChart,
+	StackChart,
+	HBarChart,
+	HeatmapChart,
+	MapChart,
 };
 ---
 

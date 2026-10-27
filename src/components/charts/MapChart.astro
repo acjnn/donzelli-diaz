@@ -1,0 +1,44 @@
+---
+import type { MapSpec } from "../../lib/svg-chart";
+
+interface Props extends MapSpec {
+	caption?: string;
+}
+
+const { label, title, width, height, areas, bins, caption } = Astro.props;
+const keyLeft = 8;
+const keyW = 92;
+---
+
+<figure class="chart chart--map">
+	<svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={label}>
+		<text class="chart-axis" x={8} y={14}>{title}</text>
+		<g class="hm-key">
+			{
+				bins.map((b, i) => (
+					<g>
+						<rect class:list={["hm-cell", `tone-${b.tone}`]} x={keyLeft + i * keyW + 1} y={26} width={keyW - 2} height={10} style={`fill-opacity:${b.opacity}`} />
+						<text class="chart-tick" x={keyLeft + i * keyW + keyW / 2} y={50} text-anchor="middle">{b.label}</text>
+					</g>
+				))
+			}
+		</g>
+		<g class="mp-areas">
+			{
+				areas.map((a) => (
+					<path class:list={["mp-area", `tone-${bins[a.bin].tone}`]} d={a.d} style={`fill-opacity:${bins[a.bin].opacity}`}>
+						<title>{a.tip}</title>
+					</path>
+				))
+			}
+		</g>
+		{
+			areas
+				.filter((a) => a.labelAt)
+				.map((a) => (
+					<text class="mp-label" x={a.labelAt!.x} y={a.labelAt!.y} text-anchor="middle">{a.labelAt!.text}</text>
+				))
+		}
+	</svg>
+	{caption && <figcaption class="chart-caption">{caption}</figcaption>}
+</figure>

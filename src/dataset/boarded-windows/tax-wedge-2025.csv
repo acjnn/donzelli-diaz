@@ -1,0 +1,41 @@
+code,country,pct
+BEL,Belgium,52.48
+DEU,Germany,49.26
+FRA,France,47.18
+AUT,Austria,47.09
+ITA,Italy,45.76
+SVN,Slovenia,45.3
+SVK,Slovak Republic,42.72
+EST,Estonia,42.64
+FIN,Finland,42.48
+EU22OECD,European Union (22 countries) in OECD,41.73
+ESP,Spain,41.44
+CZE,Czechia,41.2
+HUN,Hungary,41.15
+SWE,Sweden,41.14
+TUR,Türkiye,40.33
+LUX,Luxembourg,40.16
+LVA,Latvia,40.14
+LTU,Lithuania,39.79
+GRC,Greece,39.34
+PRT,Portugal,39.34
+NOR,Norway,36.39
+NLD,Netherlands,35.94
+DNK,Denmark,35.76
+OECD_REP,OECD average country,35.08
+POL,Poland,35.03
+JPN,Japan,33.12
+IRL,Ireland,32.63
+GBR,United Kingdom,32.38
+CAN,Canada,32.12
+ISL,Iceland,31.51
+USA,United States,29.98
+AUS,Australia,27.9
+CRI,Costa Rica,27.66
+ISR,Israel,26.07
+KOR,Korea,24.85
+CHE,Switzerland,22.98
+MEX,Mexico,21.65
+NZL,New Zealand,20.81
+CHL,Chile,7.46
+COL,Colombia,0.0

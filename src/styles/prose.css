@@ -699,6 +699,130 @@
   pointer-events: none;
 }
 
+/* Data charts: SeriesChart, StackChart, HBarChart, HeatmapChart, MapChart.
+   Tones name a role; the colour comes from the tokens. */
+.prose .chart :is(.sx-line).tone-accent { stroke: var(--accent); }
+.prose .chart :is(.sx-line).tone-deep { stroke: var(--accent-deep); }
+.prose .chart :is(.sx-line).tone-cold { stroke: var(--cold); }
+.prose .chart :is(.sx-line).tone-ink { stroke: var(--ink); }
+.prose .chart :is(.sx-line).tone-faint { stroke: var(--ink-faint); }
+.prose .chart :is(.sx-end, .st-seg, .st-swatch, .hb-bar, .hm-cell, .mp-area).tone-accent { fill: var(--accent); }
+.prose .chart :is(.sx-end, .st-seg, .st-swatch, .hb-bar, .hm-cell, .mp-area).tone-deep { fill: var(--accent-deep); }
+.prose .chart :is(.sx-end, .st-seg, .st-swatch, .hb-bar, .hm-cell, .mp-area).tone-cold { fill: var(--cold); }
+.prose .chart :is(.sx-end, .st-seg, .st-swatch, .hb-bar, .hm-cell, .mp-area).tone-ink { fill: var(--ink); }
+.prose .chart :is(.sx-end, .st-seg, .st-swatch, .hb-bar, .hm-cell, .mp-area).tone-faint { fill: var(--ink-faint); }
+
+.prose .chart .sx-line {
+  fill: none;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.prose .chart .sx-line--strong {
+  stroke-width: 2.3;
+}
+.prose .chart .sx-line--dash {
+  stroke-dasharray: 5 3.5;
+}
+.prose .chart .sx-grid {
+  stroke: var(--ink-hair);
+  stroke-width: 1;
+}
+.prose .chart .sx-axis,
+.prose .chart .sx-base,
+.prose .chart .sx-marker {
+  stroke: var(--ink-faint);
+  stroke-width: 1;
+}
+.prose .chart .sx-span {
+  fill: var(--ink);
+  opacity: 0.07;
+}
+.prose .chart .sx-endlabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.prose .chart .sx-endlabel--strong {
+  fill: var(--ink);
+  font-weight: 600;
+}
+.prose .chart .sx-hit,
+.prose .chart .st-hit {
+  fill: transparent;
+}
+.prose .chart .sx-cross {
+  stroke: var(--ink);
+  stroke-opacity: 0.5;
+  stroke-width: 1;
+  visibility: hidden;
+  pointer-events: none;
+}
+.prose .chart .sx-slice:hover .sx-cross {
+  visibility: visible;
+}
+.prose .chart .st-seg {
+  stroke: var(--paper);
+  stroke-width: 1;
+}
+.prose .chart .st-total {
+  stroke: var(--ink);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.prose .chart .st-note,
+.prose .chart .hb-value {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  fill: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.prose .chart .st-panel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--ink);
+}
+.prose .chart .st-bar:hover .st-hit,
+.prose .chart .hb-row:hover .st-hit {
+  fill: rgba(14, 12, 10, 0.05);
+}
+.prose .chart .hb-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: var(--ink-soft);
+}
+.prose .chart .hb-label--ref {
+  font-style: italic;
+}
+.prose .chart .hb-label--pick {
+  fill: var(--ink);
+  font-weight: 600;
+}
+.prose .chart .hm-year {
+  stroke: var(--paper);
+  stroke-width: 1.5;
+}
+.prose .chart .hm-cell:hover,
+.prose .chart .mp-area:hover {
+  stroke: var(--ink);
+  stroke-width: 1.2;
+}
+.prose .chart .mp-area {
+  stroke: var(--paper);
+  stroke-width: 0.8;
+}
+.prose .chart .mp-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: 3px;
+  pointer-events: none;
+}
+
 /* ============ POST NAV (prev / next) ============ */
 .post-nav {
   max-width: var(--measure);

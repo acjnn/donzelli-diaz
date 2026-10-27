@@ -3,6 +3,11 @@ declare module "*.csv?raw" {
 	export default content;
 }
 
+declare module "*.geojson?raw" {
+	const content: string;
+	export default content;
+}
+
 type Runtime = import("@astrojs/cloudflare").Runtime<Env>;
 
 declare namespace App {

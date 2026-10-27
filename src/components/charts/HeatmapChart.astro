@@ -1,0 +1,78 @@
+---
+import type { HeatmapSpec } from "../../lib/svg-chart";
+
+interface Props extends HeatmapSpec {
+	caption?: string;
+}
+
+const { label, title, rows, cols, colTicks, values, tips, bins, caption } = Astro.props;
+
+const W = 640;
+const left = 150;
+const right = W - 8;
+const top = 64;
+const cellH = 22;
+const bottom = top + rows.length * cellH;
+const height = bottom + 26;
+const cellW = (right - left) / cols.length;
+
+function binOf(v: number | null): number {
+	if (v === null || !Number.isFinite(v)) return -1;
+	const i = bins.findIndex((b) => v >= b.min && v < b.max);
+	return i === -1 ? (v < bins[0].min ? 0 : bins.length - 1) : i;
+}
+
+const keyW = (right - left) / bins.length;
+---
+
+<figure class="chart chart--heat">
+	<svg viewBox={`0 0 ${W} ${height}`} role="img" aria-label={label}>
+		<text class="chart-axis" x={8} y={14}>{title}</text>
+		<g class="hm-key">
+			{
+				bins.map((b, i) => (
+					<g>
+						<rect class:list={["hm-cell", `tone-${b.tone}`]} x={left + i * keyW + 1} y={26} width={keyW - 2} height={10} style={`fill-opacity:${b.opacity}`} />
+						<text class="chart-tick" x={left + i * keyW + keyW / 2} y={50} text-anchor="middle">{b.label}</text>
+					</g>
+				))
+			}
+		</g>
+		{
+			rows.map((r, ri) => (
+				<g>
+					<text class:list={["hb-label", { "hm-indent": r.indent }]} x={left - 8} y={top + ri * cellH + cellH / 2 + 4} text-anchor="end">
+						{r.label}
+					</text>
+					{cols.map((_, ci) => {
+						const v = values[ri][ci];
+						const bi = binOf(v);
+						if (bi < 0) return null;
+						const b = bins[bi];
+						return (
+							<rect
+								class:list={["hm-cell", `tone-${b.tone}`]}
+								x={left + ci * cellW}
+								y={top + ri * cellH + 1}
+								width={cellW + 0.3}
+								height={cellH - 2}
+								style={`fill-opacity:${b.opacity}`}
+							>
+								<title>{tips[ri][ci]}</title>
+							</rect>
+						);
+					})}
+				</g>
+			))
+		}
+		{
+			colTicks.map((t) => (
+				<g>
+					<line class="hm-year" x1={left + t.index * cellW} x2={left + t.index * cellW} y1={top} y2={bottom + 4} />
+					<text class="chart-tick" x={left + t.index * cellW + 3} y={bottom + 17}>{t.label}</text>
+				</g>
+			))
+		}
+	</svg>
+	{caption && <figcaption class="chart-caption">{caption}</figcaption>}
+</figure>

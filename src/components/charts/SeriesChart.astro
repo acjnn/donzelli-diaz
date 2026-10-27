@@ -1,0 +1,122 @@
+---
+import { lastPoint, linear, linePath, spreadLabels, type SeriesChartSpec } from "../../lib/svg-chart";
+
+interface Props extends SeriesChartSpec {
+	caption?: string;
+}
+
+const { label, title, series, xMin, xMax, xTicks, yMin, yMax, yTicks, spans = [], markers = [], notes = [], baseline, slices, caption, height = 340 } = Astro.props;
+
+const W = 640;
+const multi = series.length > 1;
+const top = multi ? 54 : 34;
+const left = 46;
+const right = W - 116;
+const bottom = height - 28;
+const x = linear(xMin, xMax, left, right);
+const y = linear(yMin, yMax, bottom, top);
+
+const ends = series
+	.map((s) => ({ s, p: lastPoint(s.points) }))
+	.filter((e): e is { s: (typeof series)[number]; p: NonNullable<ReturnType<typeof lastPoint>> } => Boolean(e.p && e.s.endLabel));
+const labelY = spreadLabels(
+	ends.map((e) => ({ id: e.s.key, y: y(e.p.y as number) + 4 })),
+	13,
+	top + 4,
+	bottom,
+);
+const drawOrder = [...series].sort((a, b) => Number(Boolean(a.strong)) - Number(Boolean(b.strong)));
+// Mono ticks run about 7.5px a character at this size.
+const legendX: number[] = [];
+let cursor = left;
+for (const s of series) {
+	legendX.push(cursor);
+	cursor += 24 + s.label.length * 7.5 + 22;
+}
+---
+
+<figure class="chart chart--series">
+	<svg viewBox={`0 0 ${W} ${height}`} role="img" aria-label={label}>
+		<text class="chart-axis" x={left} y={14}>{title}</text>
+		{
+			multi && (
+				<g class="sx-legend">
+					{series.map((s, i) => (
+						<g transform={`translate(${legendX[i]} 32)`}>
+							<line class:list={["sx-line", `tone-${s.tone}`, { "sx-line--dash": s.dashed, "sx-line--strong": s.strong }]} x1="0" x2="18" y1="-4" y2="-4" />
+							<text class="chart-tick" x="24" y="0">{s.label}</text>
+						</g>
+					))}
+				</g>
+			)
+		}
+		{
+			spans.map((s) => (
+				<g>
+					<rect class="sx-span" x={x(s.x0)} y={top} width={Math.max(x(s.x1) - x(s.x0), 1)} height={bottom - top} />
+					<text class="chart-annotation" x={x(s.x0) + 4} y={top + 16}>{s.label}</text>
+				</g>
+			))
+		}
+		{
+			yTicks.map((t) => (
+				<g>
+					<line class="sx-grid" x1={left} x2={right} y1={y(t.v)} y2={y(t.v)} />
+					<text class="chart-tick" x={left - 8} y={y(t.v) + 3} text-anchor="end">{t.label}</text>
+				</g>
+			))
+		}
+		{baseline !== undefined && <line class="sx-base" x1={left} x2={right} y1={y(baseline)} y2={y(baseline)} />}
+		<line class="sx-axis" x1={left} x2={right} y1={bottom} y2={bottom} />
+		{
+			xTicks.map((t) => (
+				<text class="chart-tick" x={x(t.v)} y={bottom + 16} text-anchor="middle">{t.label}</text>
+			))
+		}
+		{
+			markers.map((m, i) => (
+				<g>
+					<line class="sx-marker" x1={x(m.x)} x2={x(m.x)} y1={top} y2={bottom} />
+					<text class="chart-annotation" x={x(m.x) - 5} y={top + 14 + i * 16} text-anchor="end">{m.label}</text>
+				</g>
+			))
+		}
+		{
+			drawOrder.map((s) => (
+				<path
+					class:list={["sx-line", `tone-${s.tone}`, { "sx-line--dash": s.dashed, "sx-line--strong": s.strong }]}
+					d={linePath(s.points, x, y)}
+				/>
+			))
+		}
+		{
+			ends.map((e) => (
+				<g>
+					<circle class:list={["sx-end", `tone-${e.s.tone}`]} cx={x(e.p.x)} cy={y(e.p.y as number)} r={e.s.strong ? 3.2 : 2.4} />
+					<text class:list={["sx-endlabel", { "sx-endlabel--strong": e.s.strong }]} x={right + 8} y={labelY.get(e.s.key)}>
+						{e.s.endLabel}
+					</text>
+				</g>
+			))
+		}
+		{
+			notes.map((n) => (
+				<text class="chart-annotation" x={x(n.x) + (n.anchor === "end" ? -6 : 6)} y={y(n.y) - 6} text-anchor={n.anchor ?? "start"}>
+					{n.label}
+				</text>
+			))
+		}
+		<g class="sx-hover">
+			{
+				slices.map((s) => (
+					<g class="sx-slice">
+						<rect class="sx-hit" x={x(s.x0)} y={top} width={Math.max(x(s.x1) - x(s.x0), 0.5)} height={bottom - top} />
+						<line class="sx-cross" x1={x(s.x)} x2={x(s.x)} y1={top} y2={bottom} />
+						<title>{s.tip}</title>
+					</g>
+				))
+			}
+		</g>
+	</svg>
+	{caption && <figcaption class="chart-caption">{caption}</figcaption>}
+</figure>

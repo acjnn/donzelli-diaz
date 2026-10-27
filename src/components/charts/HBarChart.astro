@@ -1,0 +1,102 @@
+---
+import { linear, type HBarChartSpec } from "../../lib/svg-chart";
+
+interface Props extends HBarChartSpec {
+	caption?: string;
+}
+
+const { label, title, series, rows, xMin, xMax, xTicks, decimals, unit = "", labelWidth = 190, caption } = Astro.props;
+
+const W = 640;
+const multi = series.length > 1;
+const top = multi ? 56 : 40;
+const left = labelWidth;
+const right = W - 54;
+const barH = multi ? 10 : 12;
+const inner = 2;
+const rowH = series.length * barH + (series.length - 1) * inner + (multi ? 12 : 7);
+const height = top + rows.length * rowH + 30;
+const bottom = top + rows.length * rowH;
+const x = linear(xMin, xMax, left, right);
+const zero = x(Math.max(xMin, Math.min(0, xMax)));
+
+const fmt = (v: number) => {
+	const s = Math.abs(v).toFixed(decimals);
+	return `${v < 0 ? "−" : ""}${s}${unit}`;
+};
+
+const legendX: number[] = [];
+let cursor = left;
+for (const s of series) {
+	legendX.push(cursor);
+	cursor += 18 + s.label.length * 7.5 + 20;
+}
+---
+
+<figure class="chart chart--hbar">
+	<svg viewBox={`0 0 ${W} ${height}`} role="img" aria-label={label}>
+		<text class="chart-axis" x={8} y={14}>{title}</text>
+		{
+			multi && (
+				<g class="sx-legend">
+					{series.map((s, i) => (
+						<g transform={`translate(${legendX[i]} 36)`}>
+							<rect class:list={["st-swatch", `tone-${s.tone}`]} x="0" y="-10" width="12" height="12" rx="2" />
+							<text class="chart-tick" x="18" y="0">{s.label}</text>
+						</g>
+					))}
+				</g>
+			)
+		}
+		{
+			xTicks.map((t) => (
+				<g>
+					<line class="sx-grid" x1={x(t.v)} x2={x(t.v)} y1={top - 6} y2={bottom} />
+					<text class="chart-tick" x={x(t.v)} y={bottom + 16} text-anchor="middle">{t.label}</text>
+				</g>
+			))
+		}
+		<line class="sx-axis" x1={zero} x2={zero} y1={top - 6} y2={bottom} />
+		{
+			rows.map((r, ri) => {
+				const y0 = top + ri * rowH;
+				const mid = y0 + (series.length * barH + (series.length - 1) * inner) / 2;
+				return (
+					<g class="hb-row">
+						<text class:list={["hb-label", { "hb-label--ref": r.reference, "hb-label--pick": r.tone === "accent" }]} x={left - 10} y={mid + 4} text-anchor="end">
+							{r.label}
+						</text>
+						{series.map((s, si) => {
+							const v = r.values[s.key];
+							if (v === undefined || !Number.isFinite(v)) return null;
+							const by = y0 + si * (barH + inner);
+							const x1 = x(v);
+							const tone = r.tone ?? s.tone;
+							const show = r.showValue ?? true;
+							return (
+								<g>
+									<rect
+										class:list={["hb-bar", `tone-${tone}`]}
+										x={Math.min(zero, x1)}
+										y={by}
+										width={Math.max(Math.abs(x1 - zero), 0.8)}
+										height={barH}
+										rx="2"
+									/>
+									{show && (
+										<text class="hb-value" x={v >= 0 ? x1 + 5 : zero + 5} y={by + barH - 2} text-anchor="start">
+											{fmt(v)}
+										</text>
+									)}
+								</g>
+							);
+						})}
+						<rect class="st-hit" x="0" y={y0 - 2} width={W} height={rowH} />
+						<title>{r.tip}</title>
+					</g>
+				);
+			})
+		}
+	</svg>
+	{caption && <figcaption class="chart-caption">{caption}</figcaption>}
+</figure>
